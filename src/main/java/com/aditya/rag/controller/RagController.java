@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
@@ -26,11 +27,32 @@ public class RagController {
     }
 
     @GetMapping("/ask")
-    public String ask(@RequestParam String question) {
+    public String ask(@RequestParam String question,
+        @RequestParam UUID userId
+    ) {
+
         // Step 1: Search vector store for relevant chunks
-        List<Document> relevantDocs = vectorStore.similaritySearch(
-                SearchRequest.builder().query(question).topK(5).build()
+        // Public documents
+        List<Document> publicDocs = vectorStore.similaritySearch(
+                SearchRequest.builder()
+                .query(question)
+                .topK(5)
+                .filterExpression("visibility == 'PUBLIC'")
+                .build()
         );
+
+        // Private documents
+        List<Document> privateDocs = vectorStore.similaritySearch(
+                SearchRequest.builder()
+                .query(question)
+                .topK(5)
+                .filterExpression("owner == '" + userId + "'")
+                .build()
+        );
+
+        List<Document> relevantDocs = new java.util.ArrayList<>(publicDocs);
+        relevantDocs.addAll(privateDocs);
+
 
         // Step 2: Build context from retrieved documents
         String context = relevantDocs.stream()

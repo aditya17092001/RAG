@@ -2,6 +2,7 @@ package com.aditya.rag.service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.ai.document.Document;
 import org.springframework.ai.reader.tika.TikaDocumentReader;
@@ -30,7 +31,8 @@ public class DataIngestionService {
      * @param filename     original filename (used as metadata for filtering)
      * @return number of chunks stored
      */
-    public int ingestFile(Resource fileResource, String filename) {
+
+    public int ingestFile(Resource fileResource, String filename, UUID userId, String visibility) {
         log.info("Starting ingestion for file: {}", filename);
 
         // Step 1: Read the document (Tika auto-detects format: pdf, docx, txt, html, etc.)
@@ -42,22 +44,32 @@ public class DataIngestionService {
         List<Document> taggedDocs = documents.stream()
                 .map(d -> new Document(d.getText(), Map.of(
                         "source", filename,
-                        "type", getFileExtension(filename)
+                        "type", getFileExtension(filename),
+                        "owner", userId.toString(),
+                        "visibility", visibility
                 )))
                 .toList();
 
-        // Step 3: Clean text (remove common noise)
+        for(Document d: taggedDocs) {
+            log.info(d.getText());
+            log.info(d.getMetadata().toString());
+        }
+
+        // Step 3: Clean text (remove wiki markup noise for better embeddings)
         List<Document> cleanedDocs = taggedDocs.stream()
                 .map(d -> {
                     String clean = d.getText()
-                            .replaceAll("<ref[^>]*>.*?</ref>", "")
-                            .replaceAll("<ref[^/]*/?>", "")
-                            .replaceAll("\\{\\{[^}]*\\}\\}", "")
-                            .replaceAll("\\[\\[([^|\\]]*\\|)?", "")
-                            .replaceAll("\\]\\]", "")
-                            .replaceAll("\\[http[^\\]]*\\]", "")
-                            .replaceAll("'''?", "")
-                            .replaceAll("\\s+", " ")
+                            .replaceAll("<ref[^>]*>.*?</ref>", "")       // remove <ref>...</ref>
+                            .replaceAll("<ref[^/]*/?>", "")              // remove <ref ... />
+                            .replaceAll("\\{\\{[^}]*\\}\\}", "")        // remove {{templates}}
+                            .replaceAll("\\[\\[([^|\\]]*\\|)?", "")     // remove [[link| prefix
+                            .replaceAll("\\]\\]", "")                   // remove ]] suffix
+                            .replaceAll("\\[http[^\\]]*\\]", "")        // remove [http...] links
+                            .replaceAll("'''?", "")                     // remove bold/italic markup
+                            .replaceAll("==+", "")                      // remove == headings ==
+                            .replaceAll("\\{\\|[^}]*\\|\\}", "")        // remove {| table markup |}
+                            .replaceAll("\\[\\[File:[^\\]]*\\]\\]", "") // remove [[File:...]] images
+                            .replaceAll("\\s+", " ")                    // collapse whitespace
                             .trim();
                     return new Document(clean, d.getMetadata());
                 })
@@ -74,6 +86,7 @@ public class DataIngestionService {
                 .build();
 
         List<Document> chunks = splitter.apply(cleanedDocs);
+        log.info("First chunk metadata AFTER split: {}", chunks.get(0).getMetadata());
         log.info("Split into {} chunks for {}", chunks.size(), filename);
 
         // Step 5: Store in vector store (embeds via Ollama + persists in ChromaDB)
