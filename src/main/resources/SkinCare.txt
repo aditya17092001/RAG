@@ -1,0 +1,236 @@
+{{Short description|Type of skin care}}
+{{About|natural ingredients and traditional medicine in skin care|a general review|Skin care}}
+{{cleanup|reason=many references lack proper associated text.|date=August 2015}}
+'''Natural skin care''' uses topical creams and lotions made of ingredients available in nature.<ref name=Bowe2014/> Much of the recent literature reviews plant-derived ingredients, which may include [[herb]]s, [[root]]s, [[flower]]s and [[essential oil]]s,<ref name="Fowler2010" /><ref name="Baumann2009" /><ref name="Reuter2010AJCD" /> but natural substances in skin care products include animal-derived products such as [[beeswax]], and minerals. These substances may be combined with various carrier agents, [[preservative]]s, [[surfactant]]s, [[humectant]]s and [[emulsifier]]s.<ref name=Berton2012/>{{rp|5–8}}
+
+There are no legal definitions in the U.S. for advertising term "natural" when applied to personal care products.<ref name=Kessler2015/> Consumers often express a preference for skin products with organic and natural ingredients.<ref name=Bowe2014/> However, the terms "natural" and "organic" are different and should not be used interchangeably. In the United States, the United States Department of Agriculture (USDA) oversees the National Organic Program (NOP) with strict requirements across ingredient sourcing, production, handling, and documentation; and governs organic claim eligibility.{{Citation needed|date=May 2026}} The personal skin care market based on natural products has shown strong growth.<ref name=Tundis2015/> Clinical and laboratory studies have identified activities in many natural ingredients that have potential beneficial activities for personal skin care,<ref name=Fowler2010/><ref name=Baumann2009/> but there is a shortage of convincing evidence for natural product efficacy in medical problems.<ref name=Bhuchar2012/>
+
+Some natural products and therapies may be harmful, either to the skin or systemically.<ref name=Reuter2010AJCD/><ref name=Bhuchar2012/><ref name=Silverberg2014/> People prone to allergies should pay careful attention to what they use on their skin. Dermatologists may feel that there is enough scientific evidence to assist in the selection or avoidance of particular natural ingredients.<ref name=Bowe2014/>
+
+==Background==
+{{Main|Skin care}}
+[[File:Jojoba.jpg|310px|thumb|[[Jojoba]] oil is easily refined to be odorless, colorless and oxidatively stable, and is often used in cosmetics as a moisturizer and as a carrier oil for specialty fragrances]]
+
+Many countries require that the ingredient composition of skin care products is listed on the product, using the [[International Nomenclature of Cosmetic Ingredients]] (INCI) conventions.<ref name=Berton2012/>{{rp|4}} Ingredients are listed in the order of their percentage within the product; natural ingredients are listed in Latin and synthetic ingredients are listed by technical name.<ref name=Berton2012/>{{rp|4}} "The U.S. government has documented more than 10,500 ingredients in cosmetic products, but only a small percentage of those chemicals have been tested for safety. Of those that have been tested, some have been identified as carcinogens (causes cancer), teratogens (causes birth defects), and reproductive toxicants (damages the ability to reproduce)."<ref>{{cite web|title=Beauty or the Beast?|url=https://www.niehs.nih.gov/health/assets/docs_a_e/ehp_student_edition_lesson_beauty_or_the_beast_508.pdf|archive-url=https://web.archive.org/web/20130920001355/http://www.niehs.nih.gov/health/assets/docs_a_e/ehp_student_edition_lesson_beauty_or_the_beast_508.pdf|url-status=dead|archive-date=September 20, 2013|publisher=National Institute of Environmental Health Sciences}}</ref> <!--INCI lists over 12,000<ref name=Berton2012/>{{rp|8}} add from <ref name=Draelos2012/> -->
+
+The FDA surveyed 1,687 consumers ages 14 and older in 1994 about their use of cosmetics.<ref name=Lewis/> Nearly half of these consumers felt that a product claiming to be "natural" should contain all natural ingredients.<ref name=Lewis>{{Cite web |url=http://tgcmagazine.com/articles/163.shtml |title=Lewis C. Clearing Up Cosmetic Confusion. TGC magazine |access-date=2015-08-24 |archive-date=2016-03-07 |archive-url=https://web.archive.org/web/20160307165412/http://tgcmagazine.com/articles/163.shtml |url-status=dead }}</ref> However, although the United States Department of Agriculture (USDA) has designated within its certain requirements within its specific area of regulation for organic products,<ref name=Bowe2014/> the U.S. [[Food and Drug Administration]] (FDA) does not recognize a definition for natural products.<ref name=Bowe2014/> Accordingly, there is no legal definition in the U.S. for the advertising term "natural" in personal care products.<ref name=Kessler2015/><!--Contrary to common belief, the FDA does not regulate the sale of skin care and cosmetic products before they are sold. Incomplete statement/NOT a full truth--> In 2023, the Strengthening Organic Enforcement rule was made effective by the [[US Department of Agriculture]] which regulates the use of the term "organic" such that the use of the wording on packaging requires certification under the [[National Organic Program]].<ref>{{cite web |url=https://perkinscoie.com/insights/update/usda-issues-new-organic-labeling-rule-strengthening-enforcement |date=8 February 2023 |publisher=[[Perkins Coie]] |first=Thomas |last=Tobin |title=USDA issues new "organic" labeling rule, strengthening enforcement}}</ref> The FDA prohibits certain ingredients in cosmetics.<ref>FDA. [https://web.archive.org/web/20140327221344/http://www.fda.gov/Cosmetics/GuidanceRegulation/LawsRegulations/ucm127406.htm ''Cosmetics: Guidance & Regulation; Laws & Regulations. Prohibited & Restricted Ingredients''.]. U.S. Food and Drug Administration, Silver Spring, MD. Updated 26 January 2015.</ref>
+
+Some organic products which are designated organic may be intensely modified, sometimes considerably more so than conventional products.<ref name=Bowe2014/>
+<!--
+"Derived" ingredients are ''unnatural'' both according to the original substance and the method of derivation.
+
+The classic definition of ''natural'' skin care is based on using botanically sourced ingredients currently existing in or formed by nature, without the use of synthetic [[chemical]]s, and manufactured in such a way to preserve the integrity of the ingredients.{{Citation needed|date=February 2013}}
+
+As a result of this definition, many people who use natural skin care products, generally make their own products at home from naturally occurring ingredients.  Many people use natural skin care recipes to make remedies to care for their skin at home. Many [[spa]]s and skin care salons now focus on using more naturally derived skin care products.{{Citation needed|date=August 2015}}
+Add from <ref name=Newburger2009/>-->
+
+==History==
+{{Main|History of cosmetics}}
+Plant extracts and herbs have been used by many cultures as cosmetics and perfumes since ancient times.<ref name=Fowler2010/><ref name=Binic2013/><ref name="Lucas1930">Lucas A. [https://www.jstor.org/stable/3854332 ''Cosmetics, Perfumes and Incense in Ancient Egypt''.] The Journal of Egyptian Archaeology. May, 1930; Vol. 16, No. 1/2, pp.&nbsp;41–53. Published by: Egypt Exploration Society. Stable URL:</ref>
+
+Research is scientifically assessing natural products, selected based on experience in the ancient era.<ref name=Mukherjee2011/><ref name=Narahari2013/> Validated use of these materials and products awaits further assessment.<ref name=Mukherjee2011/><!--Add text from Banerjee1968,<ref name=Banerjee1968/> Draelos2000,<ref name=Draelos2000/> Routh1996<ref name=Routh1996/>-->
+
+<!--with natural skin care treatments for a variety of skin conditions. One such treatment consists of bullock's [[bile]], whipped [[ostrich]] eggs, olive oil, dough and resin mixed with [[milk]].{{Citation needed|date=April 2011}}
+
+The term ''natural'' has considerable market value in promoting skin care cosmetic products to consumers, but dermatologists say it has very little medical meaning and the FDA states the claim has no legal meaning. Despite pressure from advocacy groups such as The Environmental Working Group (EWG) the FDA has not defined what ''natural'' is or how to achieve it.
+
+-->
+<!--
+==Honey skin care==
+[[Honey]]'s natural [[antioxidant]] and [[anti-microbial]] properties and ability to absorb and retain moisture have been recognised and used extensively in skin care treatments as they help to protect the skin from the damage of the sun's rays and rejuvenate depleted skin.{{Citation needed|date=April 2011}} Honey is also often used to treat acne, either dabbed directly on spots or as a face mask, and has been used successfully to treat diabetic foot ulcers. It also fixes scars and marks on the skin.
+
+==Algae skin care==
+[[Polysaccharide]] derived from [[algae]] are natural [[moisturizer]]s and can be used in cosmetics as [[humectant]]s.{{citation needed|date=March 2013}} Skin care treatments, for example [[Chlorella]], uses such properties of algae to clean [[corneous]] cells, [[sebum]], and remove [[pimple]]s quickly.{{dubious|date=March 2013}}{{medcn|date=March 2013}}
+
+==Natural ingredients==
+{{Howto|date=April 2011}}
+Soap can be produced by mixing water and lye with olive oil [[castille soap]] and also coconut oil to produce a natural and mild soap. A shampoo can be produced by mixing water, with a mild surfactant such as [[decyl glucoside]], a plant gum like [[xanthan gum]] as a [[thickener]], salt, and emmolients such as coconut oil, vegetable [[glycerin]], honey and essential oils. Natural surfactants include ''[[Quillaja saponaria]]'', ''[[Acacia concinna]]'' or ''[[Sapindus]]''.{{Citation needed|date=April 2011}} Many other herbs have conditioner effects on the hair such as [[Urtica|nettles]] or [[Indian gooseberry|amla]]. A body butter can be produced by mixing oils (such as a base of olive and coconut oils) with beeswax. A natural body lotion can be produced by mixing water and [[lecithin]], cocoa or coconut butter, and dry oils such as [[grapeseed oil]] or [[thistle]] oil, beeswax, plant extracts such as [[Witch hazel (astringent)|witch hazel]], [[calendula]] or [[aloe vera]], [[hydrosols]] and [[essential oils]]. A natural toothpaste can be made by mixing baking soda, glycerin and water as a paste, with some antibacterial (e.g. sage) essential oils. The usage of natural preservatives in cosmetics is a controversial issue. Preservatives may include vitamin E (only protects oil shelf-life, not against bacteria or mold), [[rosemary]] oil, [[Azadirachta indica|neem]] oil, [[Melaleuca alternifolia|tea tree]] oil, honey, [[propolis]], salt, vinegar, lemon juice or green tea extracts, or eliminating the use of water.
+
+Ultraviolet radiations have many detrimental effects in living organisms that challenge the stability and function of cellular structures. UV exposure also alters the properties and durability of materials and affects their lifetime. It is becoming increasingly important to develop new <ref>there ARE refs for this</ref>
+-->
+
+==Cosmetics==
+
+===Consumer preference===
+Consumers often express a preference for skin products with organic and natural ingredients.<ref name=Bowe2014/> The skin care market based on natural products has shown strong growth.<ref name=Tundis2015/> Clinical and laboratory studies have identified activities in many natural ingredients that have potential beneficial activities for the skin.<ref name=Fowler2010/><ref name=Baumann2009/> Dermatologists may feel that there is enough scientific evidence to assist in the selection of particular natural ingredients.<ref name=Bowe2014/>
+
+Consumers expected products to perform as advertised.<ref name=Lewis/><ref name=Epstein2009/>
+
+===Industry response===
+Voluntary discontinuation of precursor substances that release small quantities of formaldehyde, which is a carcinogen, as well as reducing levels of the potentially carcinogenic impurity 1,4-dioxane.<ref name=Kessler2015/> Polycyclic musk fragrance ingredients, which have raised concerns as persistent and bioaccumulative endocrine disruptors, are being discontinued.<ref name=Kessler2015/><!-- psoralen, Parabens used in cosmetics as a preservative that stops fungus and bacteria from growing. But multiple problems with using parabens in these products, one of which is that they mock estrogen-like behavior AND cause irritation in some people.-->
+
+==Alternative medicine==
+{{Main|Alternative medicine}}
+There are significant reservations about complementary and alternative medicine (CAM)<ref>$2.5 billion spent, no alternative cures found. Alternative Medicine. NBCNews.com. Associated Press.</ref><ref name=Abdulla1999/> including a "shortage of evidence supporting the efficacy and safety of CAM" for skin problems.<ref name=Bhuchar2012/> However, patients express a desire to utilize natural ingredients as treatment.<ref name=Bowe2014/> A literature search found a growing prevalence of CAM use for skin conditions.<ref name=Bhuchar2012/> A number of textbooks address CAM perspectives of skin care.<ref name=Leach2010/><ref>add</ref> The purpose of this section is to review botanical compounds in skin care; a broader review the history and theory behind other CAM modalities such as psychocutaneous therapies, acupuncture and homeopathy can be found in recent reviews.<ref name=Bhuchar2012/><!--add from <ref name=Narahari2013/>-->
+
+===Western===
+The plant monographs with dermatological relevance of the former German Commission E have recently been reviewed.<ref name=Reuter2010JDDG/>
+
+According to Baumann, "Botanical compounds for which dermatologic and cosmetic applications have emerged include: olive oil, chamomile,  [[Avenanthramide|colloidal oatmeal]], oat kernel extract, [[Tanacetum parthenium|feverfew]], [[Açaí palm|acai berry]], [[coffee berry]], [[curcumin]], green tea, pomegranate, [[Liquorice|licorice]], [[paper mulberry]], [[arbutin]], and soy.<ref name=Baumann2009/> "Many of these botanical sources offer biologically active components that require further in vitro and in vivo investigation".<ref name=Baumann2009/>
+
+A review of 35 plant [[Family (taxonomy)|families]] found that a "variety of phytomolecules, derived in particular from polyphenols, triterpenes and sterols classes, demonstrated a promising activity."<ref name=Tundis2015/><!--Add from Sinha2014,<ref name=Sinha2014/> Ben-Arye2003<ref name=Ben-Arye2003/>-->
+
+Colloidal oatmeal may be beneficial in psoriasis. Aloe vera may help in atopic dermatitis. In both these conditions, the benefit may arise from anti-inflammatory properties. "For combating acne and rosacea, green tea, niacinamide and feverfew are considered efficacious. For [[hyperpigmentation]] and antioxidative capabilities, licorice, green tea, arbutin, soy, acai berry, turmeric and pomegranate are among those plants and compounds found to be most beneficial. Additional research is needed to determine to confirm and elucidate the benefits of these ingredients in the prevention and management of skin disease."<ref name=Fowler2010/>
+
+An assessment of clinical trials on green tea preparations and their uses in dermatology found some evidence for potential benefits.<ref name=Pazyar2012/>
+
+===Ayurveda===
+{{Main|Ayurveda}}
+
+[[Ayurvedic]] skincare is derived from medicinal practices that began over 5,000-years ago in India.<ref name=Routh1999/> Ayurvedic medicine and healing practices are based on Indian philosophical, psychological, conventional, and medicinal understandings. <!--Ayurvedic approach to skincare is holistic and considers the mind, body, and spirit together. Ayurvedas practices the belief that there are three basic principles or humor born out of five basic elements that exist in nature. These principles are known as Vata, Pitta, and Kapha. These principles are believed to work together in harmony to make up the entire body.
+In Ayurvedic skincare, there are seven different types of the constitution that govern skin and hair types: Vata, Pitta, Kapha, Vata-Pitta, Vata-Kapha, Pitta-Kapha, or Vata-Pitta-Kapha. Most people fall into a combination of two of the three principles.  Ayurveda advises to modify one's diet, exercise, lifestyle, and supplements according to one's constitution of this three humors.-->
+Most of the ayurvedic skincare products contain the following herbs—aloe vera, almond, avocado, carrot, castor, clay, cocoa, coconut oil, cornmeal, cucumber, cutch tree, emu oil, ginkgo biloba, ginseng, grape seed oil, ground almond and walnut shell, horse chestnut, witch hazel, and honey.{{citation needed|date=August 2015}}
+
+Ayurvedic approaches have been used in [[molluscum contagiosum]],<ref name=Kalasannavar2013/> [[lymphatic filariasis]], [[vitiligo]] and [[lichen planus]].<ref name=Narahari2013/>
+
+''[[Phyllanthus emblica]]'' (amla, Indian gooseberry) has been used in ayurvedic medicine.<ref name=Krishnaveni2010/> Standardized extracts of Phyllanthus emblica have a long-lasting and broad-spectrum antioxidant activity.<ref name=Chaudhuri2002/> This may be suitable for use in [[Anti-aging cream]], sunscreen and general purpose skin care products.<ref name=Chaudhuri2002/><!--add from,<ref name=Narahari2011/><ref name=Mehta2011/>-->
+
+===Traditional Chinese medicine===
+
+===Substances===
+Natural skin care ingredients include [[jojoba]], [[safflower oil]], [[rose hip seed oil]], [[shea butter]], [[beeswax]], [[Witch hazel (astringent)|witch hazel]], [[aloe vera]], [[tea tree oil]], coconut oil, and chamomile. <!--Many of these natural ingredient combinations can be tailored specifically to the individual's skin type or skin condition.-->
+* [[Egg oil]] can be used as an excipient/carrier in a variety of cosmetic preparations such as creams, ointments, sun-screen products, or lotions.  In Indian,<ref>H. Panda: ''[https://books.google.com/books?id=64s1LkjmPmQC&q=roghan+baiza+murgh&pg=PA146 Handbook On Ayurvedic Medicines With Formulae, Processes And Their Uses]''</ref> Japanese, [[Unani]] (Roghan Baiza Murgh)<ref>{{Cite book|url=https://books.google.com/books?id=Y8s9suG-P7EC&q=roghan%20baiza%20murgh&pg=PA103|title=Home Made Herbal Cosmetics|last=Babu|first=S. Suresh|date=2005|publisher=Pustak Mahal|isbn=978-81-223-0775-7|language=en}}</ref> and Chinese<ref>Zhong Ying Zhou, Hui De Jin: ''[https://books.google.com/books?id=JaFIATxmdoUC&q=%22egg+yolk+oil%22+skin&pg=PA222 Clinical manual of Chinese herbal medicine and acupuncture]''</ref> [[traditional medicine]], egg oil was traditionally used as a treatment for [[hair care]].
+* [[Jojoba]] is used for skin care because it is a natural moisturizer for the skin. Jojoba is actually a liquid wax that becomes solid below room temperature, but is known as an oil.<ref name=Pazyar2013/><ref name=Meier2012/><ref name=Ranzato2011/>
+* [[Shea butter]] is derived from the kernel of the shea tree (''Vitellaria paradoxa''). Shea butter is known for its cosmetic properties as a [[moisturizer]] and [[emollient]].<ref name=Ayegnon2014/><ref name=Zhang2014/>
+<!-- add from <ref name=Wheeler2011/><ref name=Akihisa2010/><ref name=Veraldi2009/><ref name=Loden1996/><ref name=Mital1974/><ref name=Konning1974/><ref name=Farnsworth1973/><ref name=Somorin1973/><ref name=Mital1971/>
+Add from Plants used in cosmetics Talal Aburjai* and Feda M. Natsheh Article first published online: 27 OCT 2003 DOI: 10.1002/ptr.1363  2003 John Wiley & Sons, Ltd.-->
+
+===Research===
+Dermatological research suggests that the bioactive ingredients used in cosmeceuticals have benefits beyond the traditional moisturizer (e.g., Chen et al., 2005;<ref>Zhou Chen, Jin Young Seo, Yeon Kyung Kim, Se Rah Lee, Kyu Han Kim, Kwang Hyun Cho, Hee Chul Eun, and Jin Ho Chung, Heat Modulation of Tropoelastin, Fibrillin-1, and MatrixMetalloproteinase-12 in Human Skin In VivoJ Invest Dermatol 124:70 –78, 2005</ref> Zettersten, Ghadially, Feingold, Crumrine, & Elias, 1997).<ref name=Zettersten1997/> However, despite reports of benefits from some cosmeceutical products, there are no formal requirements to prove that these products live up to their claims.
+
+Biocompatible and environmentally friendly natural compounds have the potential to provide materials with photoresistant and thermoresistant properties.<ref name=Fernandes2015/>
+
+Dehydroabietic acid (DAA), a naturally occurring [[diterpene]] resin acid, "has lifespan extension effects in ''Caenorhabditis elegans'', prevents lipofuscin accumulation, and prevents [[collagen]] secretion in human dermal fibroblasts. We found that these anti-aging effects are primarily mediated by [[Sirtuin 1|SIRT1]] activation." DAA may activate SIRT1 enzymatic activity, which may have a preventive effect against the aging process.<ref name=Kim2015/>
+
+Validated use of these materials and products awaits further assessment.<ref name=Mukherjee2011/>
+
+==Related products==
+{{Main|Cosmeceutical|Nutricosmetics}}
+[[Cosmeceutical]]s are topically applied, combination products that bring together [[cosmetics]] and "biologically active ingredients". Products which are similar in perceived benefits but ingested orally are known as [[nutricosmetics]]. According to the [[Food and Drug Administration|United States Food and Drug Administration]] (FDA), the [[Federal Food, Drug, and Cosmetic Act|Food, Drug, and Cosmetic Act]] "does not recognize any such category as "cosmeceuticals". A product can be a drug, a cosmetic, or a combination of both, but the term "[[cosmeceutical]]" has no meaning under the law". Drugs are subject to an intensive review and approval process by FDA. Cosmetics, and these related products, although regulated, are not approved by FDA prior to sale.{{citation needed|date=June 2020}}<!-- Add from <ref name=Baumann2007/><ref name=Draelos2009/><ref name=Mantle2001/>-->
+
+==Cautions==
+Some alternative and natural products and therapies may be harmful, either to the skin or systemically.<ref name=Reuter2010AJCD/><ref name=Bhuchar2012/><ref name=Silverberg2014/>
+
+The FDA recommends understanding the ingredient label and says "There is no list of ingredients that can be guaranteed not to cause allergic reactions, so consumers who are prone to allergies should pay careful attention to what they use on their skin", further warning that "[t]here is no basis in fact or scientific legitimacy to the notion that products containing natural ingredients are good for the skin". Food preservatives are commonly used to preserve the safety and efficacy in these products. Alternative remedies may increase the prevalence of [[eczema]].<ref name=Silverberg2014/> Bhuchar recommends that "ingestible substances including most homeopathic, Ayurvedic, and traditional Chinese medicine herbal formulations that are not US FDA regulated should be viewed with caution as they may cause severe adverse effects" such as [[arsenic poisoning]] and [[liver failure]]."<ref name=Bhuchar2012/>
+
+Given the shortage of evidence for natural skin care efficacy, if applied it may often need to be used in combination with conventional treatment, rather than independently.<ref name=Bhuchar2012/> In fact, a recent 2022 study found that nearly all skin products that have the label "natural" actually contained ingredients that triggered contact dermatitis. The study looked at nearly 1,700 products. <ref>{{Cite web |date=2023-04-14 |title=Are Natural Skin Care Products Actually Better for Your Skin? |url=https://health.clevelandclinic.org/natural-skin-care/ |access-date=2023-09-16 |website=Cleveland Clinic |language=en-US}}</ref>
+
+According to Bhuchar, there is a consensus in the literature that dermatologists need more information about CAM.<ref name=Bhuchar2012/> Wu advises that "dermatologists should be aware of what patients may be using and be able to advise them about the efficacy of these ingredients or the potential for adverse effects".<ref name=Wu2006/> Many patients fail to inform their physicians about their use of herbal ingredients.<ref name=Wu2006/>
+
+==References==
+{{reflist|2|refs=
+
+<!--This reference list is organized alphanumerically by arbitrary ref name-->
+
+<ref name=Abdulla1999>{{Cite journal|url=http://www.nature.com/articles/news990513-8|title=Phytotherapy - good science or big business?|first=Sara|last=Abdulla|date=May 13, 1999|journal=Nature|pages=news990513–8|doi=10.1038/news990513-8|url-access=subscription}}</ref>
+
+<!--<ref name=Akihisa2010>{{cite journal |vauthors=Akihisa T, Kojima N, Kikuchi T, Yasukawa K, Tokuda H, Masters ET, Manosroi A, Manosroi J |title=Anti-inflammatory and chemopreventive effects of triterpene cinnamates and acetates from shea fat |journal=J Oleo Sci |volume=59 |issue=6 |pages=273–80 |year=2010 |pmid=20484832 |doi= 10.5650/jos.59.273}}</ref>-->
+
+<ref name=Ayegnon2014>{{cite journal  |vauthors=Ayegnon BP, Kayodé AP, Tchobo FP, etal |title=Profiling the quality characteristics of the butter of Pentadesma butyracea with reference to shea butter |journal=J. Sci. Food Agric. |volume= 95|issue= 15|pages= 3137–43|year=2014 |pmid=25523343 |doi=10.1002/jsfa.7052 }}</ref>
+
+<!--<ref name=Baumann2007>{{cite journal |vauthors=Baumann LS |title=Less-known botanical cosmeceuticals |journal=Dermatol Ther |volume=20 |issue=5 |pages=330–42 |year=2007 |pmid=18045358 |doi=10.1111/j.1529-8019.2007.00147.x }}</ref>-->
+
+<ref name=Baumann2009>{{cite journal |vauthors=Baumann L, Woolery-Lloyd H, Friedman A |title="Natural" ingredients in cosmetic dermatology |journal= [[Journal of Drugs in Dermatology]] |volume=8 |issue=6 Suppl |pages=s5–9 |year=2009 |pmid=19562883 |url=https://jddonline.com/articles/dermatology/S154596169S0061X }}</ref>
+
+<!--<ref name=Banerjee1968>{{cite journal |vauthors=Banerjee BN, Dutta AK |title=Cross section of dermatology through the evolution of history |journal=Indian J Dermatol |volume=13 |issue=4 |pages=73–81 |year=1968 |pmid=4892361 }}</ref>
+
+<ref name=Ben-Arye2003>{{cite journal |vauthors=Ben-Arye E, Ziv M, Frenkel M, Lavi I, Rosenman D |title=Complementary medicine and psoriasis: linking the patient's outlook with evidence-based medicine |journal=Dermatology  |volume=207 |issue=3 |pages=302–7 |year=2003 |pmid=14571074 |doi= 10.1159/000073094}}</ref>-->
+
+<ref name=Berton2012>Berton H. ''The Essential Guide to Natural Skin Care''. Llewellyn Worldwide, 2012. {{ISBN|9780738730561}}</ref>
+
+<ref name=Binic2013>{{cite journal  |vauthors=Binic I, Lazarevic V, Ljubenovic M, etal |title=Skin ageing: natural weapons and strategies |journal=Evid Based Complement Alternat Med |volume=2013 |pages=1–10 |year=2013 |pmid=23431351 |pmc=3569896 |doi=10.1155/2013/827248 |doi-access=free }}</ref>
+
+<ref name=Bowe2014>{{cite journal |vauthors=Bowe WP, Pugliese S |title=Cosmetic benefits of natural ingredients |journal= [[Journal of Drugs in Dermatology]] |volume=13 |issue=9 |pages=1021–5; quiz 26–7 |year=2014 |pmid=25226001 |url= https://jddonline.com/articles/dermatology/S1545961614P1021X }}</ref>
+
+<ref name=Bhuchar2012>{{cite journal |vauthors=Bhuchar S, Katta R, Wolf J |title=Complementary and alternative medicine in dermatology: an overview of selected modalities for the practicing dermatologist |journal=Am J Clin Dermatol |volume=13 |issue=5 |pages=311–7 |year=2012 |pmid=22668453 |doi=10.2165/11597560-000000000-00000 |s2cid=34734099 }}</ref>
+
+<ref name=Chaudhuri2002>{{cite journal |vauthors=Chaudhuri RK |title=Emblica cascading antioxidant: a novel natural skin care ingredient |journal=Skin Pharmacol. Appl. Skin Physiol. |volume=15 |issue=5 |pages=374–80 |year=2002 |pmid=12239434 |doi= 10.1159/000064544|s2cid=43763682 }}</ref>
+
+<!--<ref name=Draelos2000>{{cite journal |vauthors=Draelos ZD |title=Cosmetics and skin care products. A historical perspective |journal=Dermatol Clin |volume=18 |issue=4 |pages=557–9 |year=2000 |pmid=11059363 |doi= 10.1016/s0733-8635(05)70206-0}}</ref>
+
+<ref name=Draelos2009>{{cite journal |vauthors=Draelos ZD |title=Cosmeceuticals: undefined, unclassified, and unregulated |journal=Clin. Dermatol. |volume=27 |issue=5 |pages=431–4 |year=2009 |pmid=19695473 |doi=10.1016/j.clindermatol.2009.05.005 }}</ref>
+
+<ref name=Draelos2012>{{cite journal |vauthors=Draelos ZD|title=Cosmetics, categories, and the future |journal=Dermatol Ther |volume=25 |issue=3 |pages=223–8 |year=2012 |pmid=22913438 |doi=10.1111/j.1529-8019.2012.01498.x }}</ref>-->
+
+<ref name=Epstein2009>{{cite journal |vauthors=Epstein H |title=Cosmeceutical vehicles |journal=Clin. Dermatol. |volume=27 |issue=5 |pages=453–60 |year=2009 |pmid=19695476 |doi=10.1016/j.clindermatol.2009.05.007 }}</ref>
+
+<!--<ref name=Ernst2000>{{cite journal |vauthors=Ernst E |title=Adverse effects of herbal drugs in dermatology |journal=Br. J. Dermatol. |volume=143 |issue=5 |pages=923–9 |year=2000 |pmid=11069498 |doi= 10.1046/j.1365-2133.2000.03822.x}}</ref>
+
+<ref name=Farnsworth1973>{{cite journal |vauthors=Farnsworth NR |title=Shea butter tree |journal=J Clin Pharmacol |volume=13 |issue=8 |pages=372 |year=1973 |pmid=4490010 |doi= 10.1002/j.1552-4604.1973.tb00228.x}}</ref>-->
+
+<ref name=Fernandes2015>{{cite journal  |vauthors=Fernandes SC, Alonso-Varona A, Palomares T, etal |title=Exploiting Mycosporines as Natural Molecular Sunscreens for the Fabrication of UV-Absorbing Green Materials |journal=ACS Appl Mater Interfaces |volume=7 |issue=30 |pages=16558–64 |year=2015 |pmid=26168193 |doi=10.1021/acsami.5b04064 }}</ref>
+
+<ref name=Fowler2010>{{cite journal |vauthors=Fowler JF, Woolery-Lloyd H, Waldorf H, Saini R |title=Innovations in natural ingredients and their use in skin care |journal= [[Journal of Drugs in Dermatology]] |volume=9 |issue=6 Suppl |pages=S72–81; quiz s82–3 |year=2010 |pmid=20626172 |url=https://jddonline.com/articles/dermatology/S1545961610S0071X }}</ref>
+
+<!--<ref name=Juckett1996>{{cite journal |vauthors=Juckett G |title=Plant dermatitis. Possible culprits go far beyond poison ivy |journal=Postgrad Med |volume=100 |issue=3 |pages=159–63, 167–71 |year=1996 |pmid=8795652 |doi= 10.3810/pgm.1996.09.75}}</ref>-->
+
+<ref name=Kalasannavar2013>{{cite journal |vauthors=Kalasannavar SB, Sawalgimath MP |title=Molluscum contagiosum: A novel Ayurvedic approach |journal=Anc Sci Life |volume=33 |issue=1 |pages=49–51 |year=2013 |pmid=25161331 |pmc=4140023 |doi=10.4103/0257-7941.134606 |doi-access=free }}</ref>
+
+<ref name=Kessler2015>Kessler R. More than Cosmetic Changes: Taking Stock of Personal Care Product Safety. Environ Health Perspect; DOI:10.1289/ehp.123-A120 [https://web.archive.org/web/20150908124028/http://ehp.niehs.nih.gov/123-a120/]</ref>
+
+<!--<ref name=Konning1974>{{cite journal |vauthors=Konning GH, Mital HC |title=The study of shea butter. 4. Stability of medicaments in shea butter ointments and creams |journal=Pharm Acta Helv |volume=49 |issue=5-6 |pages=192–6 |year=1974 |pmid=4216903 }}</ref>-->
+
+<ref name=Krishnaveni2010>{{cite journal |vauthors=Krishnaveni M, Mirunalini S |title=Therapeutic potential of Phyllanthus emblica (amla): the ayurvedic wonder |journal=J Basic Clin Physiol Pharmacol |volume=21 |issue=1 |pages=93–105 |year=2010 |pmid=20506691 |doi= 10.1515/jbcpp.2010.21.1.93|s2cid=5729282 }}</ref>
+
+<ref name=Kim2015>{{cite journal  |vauthors=Kim J, Kang YG, Lee JY, etal |title=The natural phytochemical dehydroabietic acid is an anti-aging reagent that mediates the direct activation of SIRT1 |journal=Mol. Cell. Endocrinol. |volume=412 |pages=216–25 |year=2015 |pmid=25976661 |doi=10.1016/j.mce.2015.05.006 |s2cid=2357873 }}</ref>
+
+<!--<ref name=Lakshmi2009>{{cite journal |vauthors=Lakshmi C, Srinivas CR |title=Allergic contact dermatitis following aromatherapy with valiya narayana thailam--an ayurvedic oil presenting as exfoliative dermatitis |journal=Contact Derm. |volume=61 |issue=5 |pages=297–8 |year=2009 |pmid=19878246 |doi=10.1111/j.1600-0536.2009.01627.x }}</ref>-->
+
+<ref name=Leach2010>Leach M. ''Clinical Decision Making in Complementary & Alternative Medicine''. Publisher: Churchill Livingstone; 1 edition (July 30, 2010) pages 67-72 and 228-237 {{ISBN|9780729539333}}</ref>
+
+<!--<ref name=Loden1996>{{cite journal |vauthors=Lodén M, Andersson AC |title=Effect of topically applied lipids on surfactant-irritated skin |journal=Br. J. Dermatol. |volume=134 |issue=2 |pages=215–20 |year=1996 |pmid=8746332 |doi= 10.1046/j.1365-2133.1996.978714.x}}</ref>-->
+
+<!--<ref name=Mantle2001>{{cite journal |vauthors=Mantle D, Gok MA, Lennard TW |title=Adverse and beneficial effects of plant extracts on skin and skin disorders |journal=Adverse Drug React Toxicol Rev |volume=20 |issue=2 |pages=89–103 |year=2001 |pmid=11482001 }}</ref>
+
+<ref name=Mehta2011>{{cite journal |vauthors=Mehta CS, Dave AR, Shukla VD |title=A clinical study of some Ayurvedic compound drugs in the assessment quality of life of patients with Eka Kushtha (psoriasis) |journal=AYU |volume=32 |issue=3 |pages=333–9 |year=2011 |pmid=22529646 |pmc=3326877 |doi=10.4103/0974-8520.93909 }}</ref>-->
+
+<ref name=Meier2012>{{cite journal |vauthors=Meier L, Stange R, Michalsen A, Uehleke B |title=Clay jojoba oil facial mask for lesioned skin and mild acne--results of a prospective, observational pilot study |journal=Forsch Komplementärmed |volume=19 |issue=2 |pages=75–9 |year=2012 |pmid=22585103 |doi=10.1159/000338076 |s2cid=31083201 |url=https://www.zora.uzh.ch/id/eprint/66594/1/Meier_et_al_Jojoba_Oil_FOKOM_19%282%29_2012_75-79.pdf}}</ref>
+
+<!--<ref name=Mital1971>{{cite journal |vauthors=Mital HC, Dove FR |title=The study of shea butter. 1. Physico-chemical properties |journal=Planta Med. |volume=20 |issue=3 |pages=283–8 |year=1971 |pmid=5125496 |doi=10.1055/s-0028-1099706 }}</ref>
+
+<ref name=Mital1974>{{cite journal |vauthors=Mital HC, Adotey J, Dove FR |title=The study of shea butter. 3. Comparative assessment of antioxidants and release of medicaments |journal=Pharm Acta Helv |volume=49 |issue=1 |pages=28–30 |year=1974 |pmid=4605344 }}</ref>-->
+
+<ref name=Mukherjee2011>{{cite journal |vauthors=Mukherjee PK, Maity N, Nema NK, Sarkar BK |title=Bioactive compounds from natural resources against skin aging |journal=Phytomedicine |volume=19 |issue=1 |pages=64–73 |year=2011 |pmid=22115797 |doi=10.1016/j.phymed.2011.10.003 }}</ref>
+
+<!--<ref name=Narahari2011>{{cite journal |vauthors=Narahari SR, Ryan TJ, Bose KS, Prasanna KS, Aggithaya GM |title=Integrating modern dermatology and Ayurveda in the treatment of vitiligo and lymphedema in India |journal=Int. J. Dermatol. |volume=50 |issue=3 |pages=310–34 |year=2011 |pmid=21342165 |doi=10.1111/j.1365-4632.2010.04744.x }}</ref>-->
+
+<ref name=Narahari2013>{{cite journal |vauthors=Narahari SR, Prasanna KS, Sushma KV |title=Evidence-based integrative dermatology |journal=Indian J Dermatol |volume=58 |issue=2 |pages=127–31 |year=2013 |pmid=23716802 |pmc=3657212 |doi=10.4103/0019-5154.108046 |doi-access=free }}</ref>
+
+<!--<ref name=Newburger2009>{{cite journal |vauthors=Newburger AE |title=Cosmeceuticals: myths and misconceptions |journal=Clin. Dermatol. |volume=27 |issue=5 |pages=446–52 |year=2009 |pmid=19695475 |doi=10.1016/j.clindermatol.2009.05.008 }}</ref>-->
+
+<ref name=Pazyar2012>{{cite journal |vauthors=Pazyar N, Feily A, Kazerouni A |title=Green tea in dermatology |journal=Skinmed |volume=10 |issue=6 |pages=352–5 |year=2012 |pmid=23346663 }}</ref>
+
+<ref name=Pazyar2013>{{cite journal  |vauthors=Pazyar N, Yaghoobi R, Ghassemi MR, etal |title=Jojoba in dermatology: a succinct review |journal=G Ital Dermatol Venereol |volume=148 |issue=6 |pages=687–91 |year=2013 |pmid=24442052 }}</ref>
+
+<ref name=Ranzato2011>{{cite journal |vauthors=Ranzato E, Martinotti S, Burlando B |title=Wound healing properties of jojoba liquid wax: an in vitro study |journal=J Ethnopharmacol |volume=134 |issue=2 |pages=443–9 |year=2011 |pmid=21211559 |doi=10.1016/j.jep.2010.12.042 }}</ref>
+
+<ref name=Reuter2010AJCD>{{cite journal |vauthors=Reuter J, Merfort I, Schempp CM |title=Botanicals in dermatology: an evidence-based review |journal=Am J Clin Dermatol |volume=11 |issue=4 |pages=247–67 |year=2010 |pmid=20509719 |doi=10.2165/11533220-000000000-00000 |s2cid=207298809 }}</ref>
+
+<ref name=Reuter2010JDDG>{{cite journal |vauthors=Reuter J, Wölfle U, Weckesser S, Schempp C |title=Which plant for which skin disease? Part 1: Atopic dermatitis, psoriasis, acne, condyloma and herpes simplex |journal=J Dtsch Dermatol Ges |volume=8 |issue=10 |pages=788–96 |year=2010 |pmid=20707875 |doi=10.1111/j.1610-0387.2010.07496.x |s2cid=3778742 |doi-access=free }}</ref>
+
+<!--<ref name=Routh1996>{{cite journal |vauthors=Routh HB, Bhowmik KR, Parish LC, Witkowski JA |title=Soaps: from the Phoenicians to the 20th century--a historical review |journal=Clin. Dermatol. |volume=14 |issue=1 |pages=3–6 |year=1996 |pmid=8901392 |doi= 10.1016/0738-081x(95)00101-k}}</ref>-->
+
+<ref name=Routh1999>{{cite journal |vauthors=Routh HB, Bhowmik KR |title=Traditional Indian medicine in dermatology |journal=Clin. Dermatol. |volume=17 |issue=1 |pages=41–7 |year=1999 |pmid=10089584 |doi= 10.1016/s0738-081x(98)00070-4}}</ref>
+
+<ref name=Silverberg2014>{{cite journal |vauthors=Silverberg JI, Lee-Wong M, Silverberg NB |title=Complementary and alternative medicines and childhood eczema: a US population-based study |journal=Dermatitis |volume=25 |issue=5 |pages=246–54 |year=2014 |pmid=25207686 |doi=10.1097/DER.0000000000000072 |s2cid=6910026 }}</ref>
+
+<!--<ref name=Sinha2014>{{cite journal |vauthors=Sinha P, Srivastava S, Mishra N, Yadav NP |title=New perspectives on antiacne plant drugs: contribution to modern therapeutics |journal=Biomed Res Int |volume=2014 |pages=301304 |year=2014 |pmid=25147793 |pmc=4132408 |doi=10.1155/2014/301304 }}</ref>
+
+<ref name=Somorin1973>{{cite journal |vauthors=Somorin O |title=Preliminary studies on the physiological effects of extracts from the roots of Shea butter tree |journal=J Clin Pharmacol New Drugs |volume=13 |issue=4 |pages=178 |year=1973 |pmid=4487165 |doi= 10.1002/j.1552-4604.1973.tb00081.x}}</ref>-->
+
+<ref name=Tundis2015>{{cite journal |vauthors=Tundis R, Loizzo MR, Bonesi M, Menichini F |title=Potential role of natural compounds against skin aging |journal=Curr. Med. Chem. |volume=22 |issue=12 |pages=1515–38 |year=2015 |pmid=25723509 |doi= 10.2174/0929867322666150227151809}}</ref>
+
+<!--<ref name=Veraldi2009>{{cite journal |vauthors=Veraldi S, De Micheli P, Schianchi R, Lunardon L |title=Treatment of pruritus in mild-to-moderate atopic dermatitis with a topical non-steroidal agent |journal=[[Journal of Drugs in Dermatology]] |volume=8 |issue=6 |pages=537–9 |year=2009 |pmid=19537379 |url=https://jddonline.com/articles/dermatology/S1545961609P0537X }}</ref>
+
+<ref name=Weber1999>{{cite journal |vauthors=Weber IC, Davis CP, Greeson DM |title=Phytophotodermatitis: the other "lime" disease |journal=J Emerg Med |volume=17 |issue=2 |pages=235–7 |year=1999 |pmid=10195477 |doi= 10.1016/S0736-4679(98)00159-0}}</ref>
+
+<ref name=Wheeler2011>{{cite journal |vauthors=Wheeler T |title=Petroleum, oats, shea butter: are 'natural' emollients best? |journal=Br J Nurs |volume=20 |issue=2 |pages=70 |year=2011 |pmid=21278652 |doi=10.12968/bjon.2011.20.2.70 }}</ref>-->
+
+<ref name=Wu2006>{{cite journal |vauthors=Wu J |title=Treatment of rosacea with herbal ingredients |journal=[[Journal of Drugs in Dermatology]] |volume=5 |issue=1 |pages=29–32 |year=2006 |pmid=16468289 |url=http://jddonline.com/articles/dermatology/S1545961614P1021X}}</ref>
+
+<ref name=Zhang2014>{{cite journal  |vauthors=Zhang J, Kurita M, Shinozaki T, etal |title=Triterpene glycosides and other polar constituents of shea (Vitellaria paradoxa) kernels and their bioactivities |journal=Phytochemistry |volume=108 |pages=157–70 |year=2014 |pmid=25446237 |doi=10.1016/j.phytochem.2014.09.017 |bibcode=2014PChem.108..157Z }}</ref>
+
+<ref name=Zettersten1997>{{cite journal |vauthors=Zettersten EM, Ghadially R, Feingold KR, Crumrine D, Elias PM |title=Optimal ratios of topical stratum corneum lipids improve barrier recovery in chronologically aged skin |journal=J. Am. Acad. Dermatol. |volume=37 |issue=3 Pt 1 |pages=403–8 |year=1997 |pmid=9308554 |doi= 10.1016/s0190-9622(97)70140-3}}</ref>
+}}
+
+[[Category:Skin care]]

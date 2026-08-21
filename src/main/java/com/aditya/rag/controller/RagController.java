@@ -1,6 +1,8 @@
 package com.aditya.rag.controller;
 
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
@@ -20,16 +22,20 @@ public class RagController {
 
     private final ChatClient chatClient;
     private final VectorStore vectorStore;
+    private final ChatMemory chatMemory;
 
-    public RagController(ChatClient.Builder chatClientBuilder, VectorStore vectorStore) {
+    public RagController(ChatClient.Builder chatClientBuilder, VectorStore vectorStore, ChatMemory chatMemory) {
         this.chatClient = chatClientBuilder.build();
         this.vectorStore = vectorStore;
+        this.chatMemory = chatMemory;
     }
 
     @GetMapping("/ask")
     public String ask(@RequestParam String question,
         @RequestParam UUID userId
     ) {
+
+        String conversationId = userId.toString();
 
         // Step 1: Search vector store for relevant chunks
         // Public documents
@@ -73,10 +79,18 @@ public class RagController {
                 Question: %s
                 """.formatted(context, question);
 
+        // Chat Memoery handles history automatically
+        chatMemory.add(conversationId, new UserMessage(question));
+
         // Step 4: Send to LLM and return response
-        return chatClient.prompt()
+        String answer = chatClient.prompt()
                 .user(augmentedPrompt)
+                .messages(chatMemory.get(conversationId))
                 .call()
                 .content();
+
+        chatMemory.add(conversationId, new UserMessage(answer));
+
+        return answer;
     }
 }

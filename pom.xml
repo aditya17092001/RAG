@@ -68,8 +68,6 @@
 			<groupId>org.springframework.ai</groupId>
 			<artifactId>spring-ai-starter-vector-store-chroma</artifactId>
 		</dependency>
-
-
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>

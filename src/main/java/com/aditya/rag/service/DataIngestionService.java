@@ -76,12 +76,12 @@ public class DataIngestionService {
                 .filter(d -> !d.getText().isBlank())
                 .toList();
 
-        // Step 4: Split into chunks
+        // Step 4: Split into chunks (smaller chunks to stay within embedding token limits)
         var splitter = TokenTextSplitter.builder()
-                .withChunkSize(400)
-                .withMinChunkSizeChars(100)
-                .withMinChunkLengthToEmbed(200)
-                .withMaxNumChunks(100)
+                .withChunkSize(300)             // reduced from 400 to stay within limits
+                .withMinChunkSizeChars(50)      // allow smaller fragments
+                .withMinChunkLengthToEmbed(100) // skip very tiny chunks
+                .withMaxNumChunks(500)          // allow more chunks for large documents
                 .withKeepSeparator(true)
                 .build();
 
