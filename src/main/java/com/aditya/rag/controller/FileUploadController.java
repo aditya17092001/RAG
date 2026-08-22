@@ -1,5 +1,6 @@
 package com.aditya.rag.controller;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
@@ -10,9 +11,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -28,8 +27,13 @@ public class FileUploadController {
     @PostMapping("/upload")
     public Map<String, Object> upload(
         @RequestParam("file") MultipartFile file,
-        @RequestParam UUID userId,
         @RequestParam(defaultValue = "PUBLIC") String visibility) {
+
+        // Get the authenticated user's ID from the JWT token (set by JwtAuthFilter)
+        UUID userId = UUID.fromString(
+                SecurityContextHolder.getContext().getAuthentication().getName()
+        );
+
         if(file.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "File is empty");
         }
@@ -40,7 +44,7 @@ public class FileUploadController {
 
         // Ingest
         int chunks = dataIngestion.ingestFile(file.getResource(), file.getOriginalFilename(), userId, visibility);
-        
+
         return Map.of(
             "filename", file.getOriginalFilename(),
             "chunks", chunks,
@@ -48,5 +52,5 @@ public class FileUploadController {
             "owner", userId
         );
     }
-    
+
 }

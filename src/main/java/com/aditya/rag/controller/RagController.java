@@ -2,10 +2,12 @@ package com.aditya.rag.controller;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
@@ -31,34 +32,33 @@ public class RagController {
     }
 
     @GetMapping("/ask")
-    public String ask(@RequestParam String question,
-        @RequestParam UUID userId
-    ) {
+    public String ask(@RequestParam String question) {
 
+        // Get the authenticated user's ID from the JWT token (set by JwtAuthFilter)
+        String userId = SecurityContextHolder.getContext().getAuthentication().getName();
         String conversationId = userId.toString();
 
         // Step 1: Search vector store for relevant chunks
         // Public documents
         List<Document> publicDocs = vectorStore.similaritySearch(
                 SearchRequest.builder()
-                .query(question)
-                .topK(5)
-                .filterExpression("visibility == 'PUBLIC'")
-                .build()
+                        .query(question)
+                        .topK(5)
+                        .filterExpression("visibility == 'PUBLIC'")
+                        .build()
         );
 
-        // Private documents
+        // Private documents owned by this user
         List<Document> privateDocs = vectorStore.similaritySearch(
                 SearchRequest.builder()
-                .query(question)
-                .topK(5)
-                .filterExpression("owner == '" + userId + "'")
-                .build()
+                        .query(question)
+                        .topK(5)
+                        .filterExpression("owner == '" + userId + "'")
+                        .build()
         );
 
         List<Document> relevantDocs = new java.util.ArrayList<>(publicDocs);
         relevantDocs.addAll(privateDocs);
-
 
         // Step 2: Build context from retrieved documents
         String context = relevantDocs.stream()
@@ -75,11 +75,11 @@ public class RagController {
                 ---------------------
                 Given the context information and no prior knowledge, answer the question.
                 If the answer is not in the context, just say you don't know.
-                
+
                 Question: %s
                 """.formatted(context, question);
 
-        // Chat Memoery handles history automatically
+        // Chat Memory handles history automatically
         chatMemory.add(conversationId, new UserMessage(question));
 
         // Step 4: Send to LLM and return response
@@ -89,7 +89,8 @@ public class RagController {
                 .call()
                 .content();
 
-        chatMemory.add(conversationId, new UserMessage(answer));
+        // Save the assistant's reply to memory
+        chatMemory.add(conversationId, new AssistantMessage(answer));
 
         return answer;
     }
