@@ -45,22 +45,29 @@ public class AuthController {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "User with this email already exists");
         }
 
+        // When OTP is disabled (e.g. SMTP blocked in the cloud), auto-verify the
+        // account at signup so the user can sign in without an email step.
+        boolean otpEnabled = otpService.isOtpEnabled();
+
         User user = User.builder()
                 .email(req.getEmail())
                 .password(passwordEncoder.encode(req.getPassword()))
                 .name(req.getName())
-                .emailVerified(false)
+                .emailVerified(!otpEnabled)
                 .build();
 
         userRepository.save(user);
 
-        otpService.generateAndSendOtp(
-                req.getEmail(),
-                "Verify your email",
-                "Welcome! Please verify your email to activate your account."
-        );
+        if (otpEnabled) {
+            otpService.generateAndSendOtp(
+                    req.getEmail(),
+                    "Verify your email",
+                    "Welcome! Please verify your email to activate your account."
+            );
+            return Map.of("message", "Signup successful. Please check your email for the OTP to verify your account.");
+        }
 
-        return Map.of("message", "Signup successful. Please check your email for the OTP to verify your account.");
+        return Map.of("message", "Signup successful. You can sign in now.");
     }
 
     // ---- VERIFY OTP: mark email verified ----

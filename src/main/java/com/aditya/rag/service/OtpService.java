@@ -2,6 +2,7 @@ package com.aditya.rag.service;
 
 import java.time.LocalDateTime;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.aditya.rag.entity.VerifyOtp;
@@ -23,9 +24,28 @@ public class OtpService {
     private final EmailService emailService;
 
     /**
+     * Master switch for OTP email verification (env: OTP_ENABLED).
+     * When false (e.g. on hosts that block SMTP), OTP emailing is skipped and
+     * validation is bypassed so signup / password-reset flows still work.
+     */
+    @Value("${app.otp.enabled:true}")
+    private boolean otpEnabled;
+
+    /** Whether OTP verification is currently enabled. */
+    public boolean isOtpEnabled() {
+        return otpEnabled;
+    }
+
+    /**
      * Generates a fresh OTP for the given email, stores it, and emails it.
+     * If OTP is disabled, this is a no-op that returns true.
      */
     public boolean generateAndSendOtp(String email, String subject, String intro) {
+        if (!otpEnabled) {
+            log.info("OTP disabled (app.otp.enabled=false); skipping OTP email for {}", email);
+            return true;
+        }
+
         String otp = GenerateOTP.generateOtp();
 
         // Upsert the OTP entry keyed by email
@@ -55,6 +75,11 @@ public class OtpService {
      * Deletes the OTP entry on success (one-time use).
      */
     public boolean validateOtp(String email, String otp) {
+        if (!otpEnabled) {
+            log.info("OTP disabled (app.otp.enabled=false); auto-approving verification for {}", email);
+            return true;
+        }
+
         VerifyOtp entry = verifyOtpRepository.findByEmail(email).orElse(null);
         if (entry == null) {
             log.debug("No OTP found for {}", email);
