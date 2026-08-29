@@ -1,7 +1,9 @@
 package com.aditya.rag.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -37,7 +39,11 @@ public class SecurityConfig {
         http
             .cors(cors -> {})
             .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll()
+            .authorizeHttpRequests(auth -> auth
+            // Always allow CORS preflight requests (browsers send OPTIONS with
+            // no auth); otherwise they get 403 and the real request never fires.
+            .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+            .requestMatchers("/auth/**").permitAll()
             .requestMatchers("/h2-console/**").permitAll()
             .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
             .requestMatchers("/actuator/health", "/actuator/health/**").permitAll()
@@ -67,14 +73,16 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    // Comma-separated allowed browser origins (patterns supported). Defaults
+    // cover local dev/preview, dev tunnels, and Netlify/Render/Vercel hosts.
+    // Override with CORS_ALLOWED_ORIGINS to pin an exact frontend URL.
+    @Value("${app.cors.allowed-origins:http://localhost:5173,http://localhost:4173,https://*.devtunnels.ms,https://*.netlify.app,https://*.onrender.com,https://*.vercel.app}")
+    private List<String> allowedOrigins;
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        // Allow local dev + any VS Code dev tunnel subdomain
-        config.setAllowedOriginPatterns(List.of(
-                "http://localhost:5173",
-                "https://*.devtunnels.ms"
-        ));
+        config.setAllowedOriginPatterns(allowedOrigins);
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
