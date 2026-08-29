@@ -2,6 +2,8 @@ package com.aditya.rag.config;
 
 import javax.sql.DataSource;
 
+import com.zaxxer.hikari.HikariDataSource;
+
 import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.ai.vectorstore.pgvector.PgVectorStore;
@@ -42,12 +44,26 @@ public class VectorStoreConfig {
             @Value("${spring.datasource.username:}") String username,
             @Value("${spring.datasource.password:}") String password,
             @Value("${spring.datasource.driver-class-name}") String driverClassName) {
-        return DataSourceBuilder.create()
+        HikariDataSource ds = DataSourceBuilder.create()
+                .type(HikariDataSource.class)
                 .driverClassName(driverClassName)
                 .url(url)
                 .username(username)
                 .password(password)
                 .build();
+        applyPoolResilience(ds);
+        return ds;
+    }
+
+    /**
+     * Applies pool settings suited to a small cloud instance + slow (free-tier)
+     * remote DB: a generous connection timeout, no fail-fast at startup so a
+     * cold DB doesn't abort boot, and a small pool.
+     */
+    private void applyPoolResilience(HikariDataSource ds) {
+        ds.setConnectionTimeout(60000);        // wait up to 60s for a connection
+        ds.setInitializationFailTimeout(-1);   // don't fail startup if DB is slow to wake
+        ds.setMaximumPoolSize(3);              // small instance, keep the pool lean
     }
 
     /**
@@ -59,12 +75,15 @@ public class VectorStoreConfig {
             @Value("${vector.datasource.url}") String url,
             @Value("${vector.datasource.username}") String username,
             @Value("${vector.datasource.password}") String password) {
-        return DataSourceBuilder.create()
+        HikariDataSource ds = DataSourceBuilder.create()
+                .type(HikariDataSource.class)
                 .driverClassName("org.postgresql.Driver")
                 .url(url)
                 .username(username)
                 .password(password)
                 .build();
+        applyPoolResilience(ds);
+        return ds;
     }
 
     /** JdbcTemplate bound to the vector datasource (DB #2). */

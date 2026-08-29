@@ -198,10 +198,18 @@ configuration through Render instead.
 ### 8.1 Use the prod Dockerfile
 In the Render service **Settings**, set:
 - **Dockerfile Path** = `./Dockerfile.prod`
+- **Health Check Path** = `/actuator/health`
 
-This activates the `prod` profile (OpenRouter chat + Aiven Postgres, no Ollama).
-If Render builds the default `Dockerfile` instead, the app starts with the
-`default` profile and tries to use Ollama, which isn't available in the cloud.
+`./Dockerfile.prod` activates the `prod` profile (OpenRouter chat + Aiven
+Postgres, no Ollama). If Render builds the default `Dockerfile` instead, the app
+starts with the `default` profile and tries to use Ollama, which isn't available
+in the cloud.
+
+The Health Check Path must be `/actuator/health` (provided by Spring Boot
+Actuator and permitted without auth in `SecurityConfig`). Do NOT use `/healthz`
+or `/` — the former doesn't exist and the latter is blocked by Spring Security,
+so Render's probe would fail and it would shut the container down even after a
+successful start.
 
 ### 8.2 Set environment variables
 Open the service's **Environment** tab. The quickest way is **"Add from .env"**:
@@ -240,13 +248,41 @@ needed beyond deploying the current code.
 2. In Render: confirm Dockerfile Path = `./Dockerfile.prod` and env vars are set.
 3. Trigger a deploy and watch the logs for `Started LocalRagApplication`.
 
-### 8.5 Common Render failures
+### 8.5 Fast startup & connection resilience
+Small cloud instances (Render free tier) are slow. Without tuning, cold start
+took ~200s and Render shut the container down mid-boot. The following settings
+(already in the codebase) bring startup to a few seconds and tolerate a slow
+free-tier database wake-up:
+
+- `spring.main.lazy-initialization=true` and `spring.jpa.open-in-view=false`
+  in `application.properties` (much faster boot).
+- Health endpoint reports UP without blocking on the DB:
+  `management.endpoint.health.probes.enabled=true` and
+  `management.health.db.enabled=false`.
+- Hikari pool settings are applied IN CODE in `VectorStoreConfig`
+  (connectionTimeout 60s, initializationFailTimeout -1, maxPoolSize 3), because
+  the DataSources are built manually and `spring.datasource.hikari.*` auto-binding
+  does not apply to a hand-built DataSource (it caused a "Could not bind
+  properties to 'HikariDataSource'" startup failure).
+
+### 8.6 Common Render failures
 - `Could not resolve placeholder 'JWT_SECRET'` -> env vars not set (do 8.2).
 - `No active profile set ... "default"` -> not using `Dockerfile.prod` (do 8.1).
 - `No open ports detected` -> app not on Render's `PORT` (fixed by 8.3; make
   sure the deployed code includes `server.port=${PORT:8080}`).
+- `UnknownHostException: <some-host>.aivencloud.com` -> `DB_URL`/`VECTOR_DB_URL`
+  points at the wrong Aiven database. Use the RAG database JDBC URLs (see 8.2)
+  and make sure the value starts with `jdbc:postgresql://`, not `postgres://`.
+- Started successfully then `Graceful shutdown` seconds later -> Render's health
+  check failed or startup was too slow. Set Health Check Path to
+  `/actuator/health` (8.1) and ensure the fast-startup settings (8.5) are deployed.
+- `Could not bind properties to 'HikariDataSource'` -> do not add
+  `spring.datasource.hikari.*` in properties; the pool is configured in code (8.5).
+- 503 from the service URL -> usually the free instance spinning up from idle
+  (wait ~50s and retry), or no healthy instance because the deploy hasn't gone
+  Live yet.
 
-### 8.6 Frontend for a Render backend
+### 8.7 Frontend for a Render backend
 Update `frontend/.env.production` with your Render backend URL, then rebuild:
 ```bash
 cd frontend
