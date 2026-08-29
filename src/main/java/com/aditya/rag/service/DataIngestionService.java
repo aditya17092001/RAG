@@ -42,13 +42,15 @@ public class DataIngestionService {
      * @return number of chunks stored
      */
     public int ingestFile(Resource fileResource, String filename, UUID userId, String visibility) {
-        log.info("Starting ingestion for file: {}", filename);
+        long startedAt = System.currentTimeMillis();
+        log.info("[ingest] START file='{}' owner={} visibility={}", filename, userId, visibility);
 
         // Step 1: Extract as structure-preserving HTML, then convert to Markdown
         String markdown = convertToMarkdown(fileResource, filename);
-        log.info("Converted {} to Markdown ({} chars)", filename, markdown.length());
+        log.info("[ingest] converted '{}' to Markdown ({} chars)", filename, markdown.length());
 
         if (markdown.isBlank()) {
+            log.warn("[ingest] no readable content in '{}'", filename);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No readable content found in file");
         }
 
@@ -67,11 +69,23 @@ public class DataIngestionService {
         var splitter = new RecursiveCharacterTextSplitter(1000, 200);
 
         List<Document> chunks = splitter.apply(List.of(mdDoc));
-        log.info("Split into {} chunks for {}", chunks.size(), filename);
+        log.info("[ingest] split '{}' into {} chunks", filename, chunks.size());
 
-        // Step 4: Store in vector store (embeds via Ollama + persists in ChromaDB)
-        vectorStore.add(chunks);
-        log.info("Ingestion complete. {} chunks stored for file: {}", chunks.size(), filename);
+        // Step 4: Embed each chunk (Google Gemini) and persist to the PgVector
+        // store. This is the step most likely to fail (network/TLS to the
+        // embedding API, model errors, or rate limits), so log it explicitly.
+        log.info("[ingest] embedding + storing {} chunks for '{}' ...", chunks.size(), filename);
+        try {
+            vectorStore.add(chunks);
+        } catch (Exception e) {
+            log.error("[ingest] FAILED to embed/store chunks for '{}': {}", filename, e.getMessage(), e);
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_GATEWAY,
+                    "Failed to embed/store document (embedding service error): " + e.getMessage(), e);
+        }
+
+        long tookMs = System.currentTimeMillis() - startedAt;
+        log.info("[ingest] DONE file='{}' chunks={} took={}ms", filename, chunks.size(), tookMs);
 
         return chunks.size();
     }
