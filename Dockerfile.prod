@@ -1,0 +1,44 @@
+# ==========================================================================
+# PRODUCTION Dockerfile (prod Spring profile)
+#   - Chat: OpenRouter          (hosted)
+#   - Embeddings: Google Gemini (hosted, free tier)
+#   - Relational DB: Aiven Postgres
+#   - Vector DB: Aiven pgvector
+#
+# No Ollama required - fully self-contained; all model + DB access is over
+# the network to managed services.
+#
+# Build:  docker build -f Dockerfile.prod -t local-rag:prod .
+# Run:    docker run --rm -p 8080:8080 --env-file .env local-rag:prod
+#
+# In real deployment, inject the env vars (DB_*, VECTOR_DB_*, OPENROUTER_API_KEY,
+# GEMINI_API_KEY, JWT_*, MAIL_*) through your platform's secret manager rather
+# than an .env file.
+# ==========================================================================
+
+# ---- Stage 1: build the jar with Maven ----
+FROM maven:3.9-eclipse-temurin-21 AS build
+WORKDIR /app
+
+COPY pom.xml .
+COPY .mvn/ .mvn/
+RUN mvn -B -q dependency:go-offline
+
+COPY src/ src/
+RUN mvn -B -q clean package -DskipTests
+
+# ---- Stage 2: slim runtime image ----
+FROM eclipse-temurin:21-jre
+WORKDIR /app
+
+RUN useradd --system --create-home appuser
+USER appuser
+
+COPY --from=build /app/target/*.jar app.jar
+
+# Activate the prod profile (OpenRouter chat + Aiven Postgres).
+ENV SPRING_PROFILES_ACTIVE=prod
+
+EXPOSE 8080
+
+ENTRYPOINT ["java", "-jar", "app.jar"]

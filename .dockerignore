@@ -1,0 +1,22 @@
+# Build output
+target/
+
+# Secrets & local data (never bake into the image)
+.env
+data/
+
+# Frontend (built/served separately)
+frontend/node_modules/
+frontend/dist/
+
+# IDE / VCS / docs
+.git/
+.idea/
+.vscode/
+.kiro/
+*.iml
+docs/
+
+# OS files
+.DS_Store
+Thumbs.db

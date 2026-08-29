@@ -1,6 +1,9 @@
 // Central API client for the RAG backend.
-// Uses the dev tunnel backend URL. For local dev, change to "http://localhost:8080".
-const BASE_URL = "https://8r5fjqqj-8080.inc1.devtunnels.ms";
+// Base URL comes from the Vite env var VITE_API_BASE_URL:
+//   - `npm run dev`   -> .env.development (http://localhost:8080)
+//   - `npm run build` -> .env.production  (deployed backend URL)
+// Falls back to localhost if the var is missing.
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080";
 
 // --- token storage ---
 export const getToken = () => localStorage.getItem("token");
