@@ -47,5 +47,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         // Always continue the chain
         filterChain.doFilter(request, response);
-    }    
+    }
+
+    // Re-run this filter on ASYNC dispatch too, so streaming (SSE/Flux) endpoints
+    // keep their authentication when the async request is re-dispatched.
+    @Override
+    protected boolean shouldNotFilterAsyncDispatch() {
+        return false;
+    }
 }

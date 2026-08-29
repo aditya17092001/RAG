@@ -1,0 +1,172 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #0f1115;
+  color: #e6e6e6;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-size: 14px;
+  background: #4f8cff;
+  color: white;
+  transition: background 0.15s;
+}
+button:hover { background: #3a75e0; }
+button:disabled { background: #444; cursor: not-allowed; }
+
+input, textarea, select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background: #1a1d24;
+  color: #e6e6e6;
+  font-size: 14px;
+}
+
+/* --- Auth screen --- */
+.auth-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.auth-card {
+  width: 360px;
+  background: #171a21;
+  padding: 32px;
+  border-radius: 12px;
+  border: 1px solid #262a33;
+}
+.auth-card h2 { margin-bottom: 20px; }
+.auth-card .field { margin-bottom: 14px; }
+.auth-card label { display: block; margin-bottom: 6px; font-size: 13px; color: #9aa0aa; }
+.auth-card .full-btn { width: 100%; margin-top: 8px; }
+.auth-switch { margin-top: 16px; font-size: 13px; color: #9aa0aa; text-align: center; }
+.auth-switch span { color: #4f8cff; cursor: pointer; }
+.error { color: #ff6b6b; font-size: 13px; margin-top: 10px; }
+.success { color: #51cf66; font-size: 13px; margin-top: 10px; }
+
+/* --- Chat layout --- */
+.app { display: flex; height: 100vh; }
+.sidebar {
+  width: 260px;
+  background: #14161c;
+  border-right: 1px solid #262a33;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+}
+.sidebar .new-chat { width: 100%; margin-bottom: 12px; }
+.conv-list { flex: 1; overflow-y: auto; }
+.conv-item {
+  padding: 10px 12px;
+  border-radius: 6px;
+  margin-bottom: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.conv-item:hover { background: #1e2129; }
+.conv-item.active { background: #262a33; }
+.conv-item .del { color: #ff6b6b; font-size: 12px; opacity: 0; }
+.conv-item:hover .del { opacity: 1; }
+.sidebar .logout { margin-top: 12px; background: #2a2d35; }
+
+.main { flex: 1; display: flex; flex-direction: column; }
+.messages { flex: 1; overflow-y: auto; overflow-x: hidden; padding: 24px; display: flex; flex-direction: column; }
+.main { min-width: 0; } /* allow flex child to shrink so text wraps instead of overflowing */
+
+/* Each message is a column; alignment decides left vs right */
+.msg { margin-bottom: 18px; max-width: 70%; display: flex; flex-direction: column; }
+.msg.user { align-self: flex-end; align-items: flex-end; }       /* right side */
+.msg.assistant { align-self: flex-start; align-items: flex-start; } /* left side */
+
+.msg .role { font-size: 12px; color: #9aa0aa; margin-bottom: 4px; }
+.msg.user .bubble { background: #2f6fed; color: #fff; border-bottom-right-radius: 2px; }
+.msg.assistant .bubble { background: #1e2129; border-bottom-left-radius: 2px; }
+.bubble {
+  padding: 12px 16px;
+  border-radius: 12px;
+  white-space: pre-wrap;   /* preserve newlines + wrap */
+  overflow-wrap: anywhere;  /* break very long words/URLs */
+  word-break: break-word;
+  line-height: 1.5;
+}
+
+/* blinking cursor while streaming */
+.cursor::after {
+  content: "▌";
+  animation: blink 1s steps(2, start) infinite;
+  color: #9aa0aa;
+}
+@keyframes blink { to { visibility: hidden; } }
+
+.composer { padding: 16px 24px; border-top: 1px solid #262a33; display: flex; gap: 10px; }
+.composer textarea { resize: none; height: 46px; }
+.composer button { align-self: stretch; }
+
+.upload-bar { padding: 12px 24px; border-bottom: 1px solid #262a33; display: flex; gap: 10px; align-items: center; }
+.upload-bar select { width: 130px; }
+.upload-bar .status { font-size: 13px; color: #9aa0aa; }
+.empty { color: #6b7280; text-align: center; margin-top: 40px; }
+
+/* Hamburger menu button - hidden on desktop, shown on mobile */
+.menu-btn {
+  display: none;
+  background: #2a2d35;
+  font-size: 18px;
+  padding: 8px 12px;
+}
+
+/* Overlay behind the mobile drawer */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 20;
+}
+
+/* ============ MOBILE (<= 768px) ============ */
+@media (max-width: 768px) {
+  .menu-btn { display: block; }
+  .overlay { display: block; }
+
+  /* Sidebar becomes a slide-in drawer */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 78%;
+    max-width: 300px;
+    z-index: 30;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+  }
+  .sidebar.open { transform: translateX(0); }
+
+  /* Messages take full width on mobile */
+  .msg { max-width: 90%; }
+
+  /* Tighter padding on small screens */
+  .messages { padding: 14px; }
+  .upload-bar { padding: 10px 14px; flex-wrap: wrap; }
+  .upload-bar .status { flex-basis: 100%; }
+  .composer { padding: 12px 14px; }
+
+  /* Auth card fits small screens */
+  .auth-card { width: 100%; max-width: 360px; margin: 0 16px; }
+}

@@ -53,7 +53,8 @@ pip install chromadb
 ### 1.2 Start ChromaDB server
 
 ```bash
-chroma run --host localhost --port 8000 --path ./chroma-data
+& "C:\Users\uaditya\AppData\Roaming\Python\Python314\Scripts\chroma.exe" run --host 0.0.0.0 --port 8000 --path ./chroma-data
+
 ```
 
 - `--host localhost` — only accessible from your machine
