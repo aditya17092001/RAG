@@ -86,7 +86,20 @@ public class VectorStoreConfig {
         return ds;
     }
 
-    /** JdbcTemplate bound to the vector datasource (DB #2). */
+    /**
+     * Primary JdbcTemplate bound to the LOGIN datasource (DB #1). This is what
+     * Spring AI's JDBC chat-memory repository must use. Without an explicit
+     * @Primary JdbcTemplate, auto-config could pick up the vector JdbcTemplate
+     * (DB #2), causing chat-memory SQL to run against the vector database where
+     * the spring_ai_chat_memory table does not exist ("relation does not exist").
+     */
+    @Bean
+    @Primary
+    public JdbcTemplate jdbcTemplate(@Qualifier("dataSource") DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
+    }
+
+    /** JdbcTemplate bound to the vector datasource (DB #2). Non-primary. */
     @Bean
     public JdbcTemplate vectorJdbcTemplate(@Qualifier("vectorDataSource") DataSource vectorDataSource) {
         return new JdbcTemplate(vectorDataSource);
