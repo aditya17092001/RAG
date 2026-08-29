@@ -189,7 +189,74 @@ docker run --rm -p 8080:8080 --env-file .env \
 
 ---
 
-## 8. Troubleshooting
+## 8. Deploying to Render (cloud)
+
+Render builds and runs the Docker image in the cloud. There is **no `.env`
+file** in the cloud (it's gitignored and never pushed), so you must provide the
+configuration through Render instead.
+
+### 8.1 Use the prod Dockerfile
+In the Render service **Settings**, set:
+- **Dockerfile Path** = `./Dockerfile.prod`
+
+This activates the `prod` profile (OpenRouter chat + Aiven Postgres, no Ollama).
+If Render builds the default `Dockerfile` instead, the app starts with the
+`default` profile and tries to use Ollama, which isn't available in the cloud.
+
+### 8.2 Set environment variables
+Open the service's **Environment** tab. The quickest way is **"Add from .env"**:
+paste the entire contents of your local `.env` file and Render parses each
+`KEY=value` line into an environment variable.
+
+Required variables:
+```
+JWT_SECRET
+JWT_EXPIRY
+MAIL_USERNAME
+MAIL_PASSWORD
+OPENROUTER_API_KEY
+GEMINI_API_KEY
+DB_URL
+DB_USERNAME
+DB_PASSWORD
+VECTOR_DB_URL
+VECTOR_DB_USERNAME
+VECTOR_DB_PASSWORD
+```
+
+> Note on "Secret Files": Render can also mount an uploaded file, but a secret
+> file is NOT automatically turned into environment variables. This app resolves
+> `${...}` placeholders from environment variables, so use the Environment tab
+> ("Add from .env"), not a secret file.
+
+### 8.3 Port binding
+Render injects a `PORT` environment variable and requires the app to listen on
+it. The app is configured with `server.port=${PORT:8080}`, so it uses Render's
+`PORT` automatically in the cloud and falls back to 8080 locally. No action
+needed beyond deploying the current code.
+
+### 8.4 Deploy
+1. Commit and push (including the `server.port=${PORT:8080}` change).
+2. In Render: confirm Dockerfile Path = `./Dockerfile.prod` and env vars are set.
+3. Trigger a deploy and watch the logs for `Started LocalRagApplication`.
+
+### 8.5 Common Render failures
+- `Could not resolve placeholder 'JWT_SECRET'` -> env vars not set (do 8.2).
+- `No active profile set ... "default"` -> not using `Dockerfile.prod` (do 8.1).
+- `No open ports detected` -> app not on Render's `PORT` (fixed by 8.3; make
+  sure the deployed code includes `server.port=${PORT:8080}`).
+
+### 8.6 Frontend for a Render backend
+Update `frontend/.env.production` with your Render backend URL, then rebuild:
+```bash
+cd frontend
+# VITE_API_BASE_URL=https://<your-service>.onrender.com
+npm run build
+```
+
+---
+
+## 9. Troubleshooting
 
 - **`APPLICATION FAILED TO START` / placeholder not resolved**: a required env
   var in `.env` is missing or empty.
