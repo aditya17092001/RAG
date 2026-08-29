@@ -27,6 +27,9 @@ public class StartupInfoLogger {
     @Value("${spring.ai.model.chat:unknown}")
     private String chatProvider;
 
+    @Value("${spring.ai.openai.chat.model:unset}")
+    private String openAiChatModel;
+
     @Value("${spring.ai.model.embedding.text:unknown}")
     private String embeddingProvider;
 
@@ -45,7 +48,7 @@ public class StartupInfoLogger {
         log.info("[startup] Application READY");
         log.info("[startup]   active profile : {}", profileStr);
         log.info("[startup]   server port    : {}", serverPort);
-        log.info("[startup]   chat provider  : {}", chatProvider);
+        log.info("[startup]   chat provider  : {} (openai model={})", chatProvider, openAiChatModel);
         log.info("[startup]   embed provider : {} (model={})", embeddingProvider, embeddingModel);
         log.info("[startup]   OTP enabled    : {}", otpEnabled);
         log.info("[startup]   health check   : GET /actuator/health");
