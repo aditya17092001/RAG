@@ -95,6 +95,8 @@ public class EmbeddingJobService {
                     filename, fileType, ownerId, visibility));
         }
         chunkRepository.saveAll(chunks);
+        log.debug("[embedding-job] persisted job={} document={} owner={} fileType={} visibility={} chunks={}",
+                job.getId(), documentId, ownerId, fileType, visibility, documents.size());
         return new QueuedJob(
                 new EmbeddingQueueResult(
                         job.getId(), documentId, filename, documents.size(), visibility, ownerId, "QUEUED"),
@@ -102,14 +104,29 @@ public class EmbeddingJobService {
     }
 
     public void publish(QueuedJob queuedJob) {
+        long startedAt = System.currentTimeMillis();
+        int total = queuedJob.messages().size();
+        int published = 0;
+        UUID jobId = queuedJob.result().jobId();
+        log.info("[embedding-kafka] publish batch start job={} document={} chunks={}",
+                jobId, queuedJob.result().documentId(), total);
         try {
             for (EmbeddingJobMessage message : queuedJob.messages()) {
                 producer.publish(message);
+                published++;
+                if (published == 1 || published % 50 == 0 || published == total) {
+                    log.debug("[embedding-kafka] publish batch progress job={} published={}/{}",
+                            jobId, published, total);
+                }
             }
-            log.info("[embedding-kafka] queued job={} document={} chunks={}",
-                    queuedJob.result().jobId(), queuedJob.result().documentId(), queuedJob.messages().size());
+            log.info("[embedding-kafka] queued job={} document={} chunks={} took={}ms",
+                    jobId, queuedJob.result().documentId(), total,
+                    System.currentTimeMillis() - startedAt);
         } catch (RuntimeException e) {
-            markJobFailed(queuedJob.result().jobId(), e);
+            log.error("[embedding-kafka] publish batch failed job={} published={}/{} took={}ms errorType={} reason={}",
+                    jobId, published, total, System.currentTimeMillis() - startedAt,
+                    e.getClass().getSimpleName(), shortError(e), e);
+            markJobFailed(jobId, e);
             throw new ResponseStatusException(
                     HttpStatus.SERVICE_UNAVAILABLE,
                     "Embedding queue is unavailable; please retry the upload", e);
@@ -118,12 +135,15 @@ public class EmbeddingJobService {
 
     @Transactional
     public void process(EmbeddingJobMessage message) {
+        long startedAt = System.currentTimeMillis();
         EmbeddingChunk chunk = chunkRepository.findById(message.chunkId())
                 .orElseThrow(() -> new IllegalArgumentException(
                         "Embedding chunk does not exist: " + message.chunkId()));
 
         // Kafka is at-least-once. A redelivered completed message is safe to skip.
         if (chunk.getStatus() == EmbeddingChunkStatus.EMBEDDED) {
+            log.debug("[embedding] skip already embedded job={} chunk={}/{}",
+                    message.jobId(), message.chunkIndex() + 1, message.totalChunks());
             return;
         }
 
@@ -137,6 +157,11 @@ public class EmbeddingJobService {
                         "Embedding job does not exist: " + message.jobId()));
         job.setStatus(EmbeddingJobStatus.PROCESSING);
         jobRepository.save(job);
+
+        int attempt = chunk.getAttempts();
+        int textLength = message.text() == null ? 0 : message.text().length();
+        log.debug("[embedding] processing start job={} chunk={}/{} attempt={} textLength={}",
+                message.jobId(), message.chunkIndex() + 1, message.totalChunks(), attempt, textLength);
 
         // One message contains one chunk, so this results in one embedding call.
         rateLimiter.acquire();
@@ -152,15 +177,31 @@ public class EmbeddingJobService {
                         "jobId", message.jobId().toString(),
                         "chunkIndex", message.chunkIndex(),
                         "totalChunks", message.totalChunks()));
-        vectorStore.add(List.of(document));
+
+        long vectorStoreStartedAt = System.currentTimeMillis();
+        log.debug("[embedding] vector store call start job={} chunk={}/{} attempt={}",
+                message.jobId(), message.chunkIndex() + 1, message.totalChunks(), attempt);
+        try {
+            vectorStore.add(List.of(document));
+        } catch (RuntimeException e) {
+            log.error("[embedding] vector store call failed job={} chunk={}/{} attempt={} took={}ms errorType={} reason={}",
+                    message.jobId(), message.chunkIndex() + 1, message.totalChunks(), attempt,
+                    System.currentTimeMillis() - vectorStoreStartedAt,
+                    e.getClass().getSimpleName(), shortError(e), e);
+            throw e;
+        }
+        log.debug("[embedding] vector store call complete job={} chunk={}/{} took={}ms",
+                message.jobId(), message.chunkIndex() + 1, message.totalChunks(),
+                System.currentTimeMillis() - vectorStoreStartedAt);
 
         chunk.setStatus(EmbeddingChunkStatus.EMBEDDED);
         chunk.setLastError(null);
         chunkRepository.save(chunk);
         updateJobProgress(message.jobId(), null);
 
-        log.info("[embedding] embedded job={} chunk={}/{}",
-                message.jobId(), message.chunkIndex() + 1, message.totalChunks());
+        log.info("[embedding] embedded job={} chunk={}/{} attempt={} totalTook={}ms",
+                message.jobId(), message.chunkIndex() + 1, message.totalChunks(), attempt,
+                System.currentTimeMillis() - startedAt);
     }
 
     @Transactional
@@ -171,8 +212,11 @@ public class EmbeddingJobService {
             chunkRepository.save(chunk);
         });
         updateJobProgress(message.jobId(), errorMessage(error));
-        log.warn("[embedding] retry scheduled job={} chunk={} reason={}",
-                message.jobId(), message.chunkIndex(), errorMessage(error));
+        log.warn("[embedding] retry scheduled job={} chunk={}/{} errorType={} reason={}",
+                message.jobId(), message.chunkIndex() + 1, message.totalChunks(),
+                error.getClass().getSimpleName(), shortError(error));
+        log.debug("[embedding] retry exception details job={} chunk={}/{}",
+                message.jobId(), message.chunkIndex() + 1, message.totalChunks(), error);
     }
 
     @Transactional
@@ -188,8 +232,9 @@ public class EmbeddingJobService {
             job.setLastError(errorMessage(error));
             updateJobProgress(job, errorMessage(error));
         }
-        log.error("[embedding-dlt] permanently failed job={} chunk={} reason={}",
-                message.jobId(), message.chunkIndex(), errorMessage(error));
+        log.error("[embedding-dlt] permanently failed job={} chunk={}/{} errorType={} reason={}",
+                message.jobId(), message.chunkIndex() + 1, message.totalChunks(),
+                error.getClass().getSimpleName(), shortError(error));
     }
 
     @Transactional
@@ -198,6 +243,8 @@ public class EmbeddingJobService {
             job.setStatus(EmbeddingJobStatus.FAILED);
             job.setLastError(errorMessage(error));
             jobRepository.save(job);
+            log.error("[embedding-job] marked FAILED job={} errorType={} reason={}",
+                    jobId, error.getClass().getSimpleName(), shortError(error));
         });
     }
 
@@ -228,6 +275,16 @@ public class EmbeddingJobService {
             job.setStatus(EmbeddingJobStatus.PROCESSING);
         }
         jobRepository.save(job);
+        log.debug("[embedding-job] progress job={} completed={}/{} failed={} status={} errorPresent={}",
+                job.getId(), completed, job.getTotalChunks(), failed, job.getStatus(), error != null);
+    }
+
+    private String shortError(Throwable error) {
+        String message = error.getMessage();
+        if (message == null || message.isBlank()) {
+            message = error.getClass().getSimpleName();
+        }
+        return message.length() > 300 ? message.substring(0, 300) : message;
     }
 
     private String errorMessage(Throwable error) {

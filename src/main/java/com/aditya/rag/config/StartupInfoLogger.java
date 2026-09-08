@@ -39,6 +39,18 @@ public class StartupInfoLogger {
     @Value("${app.otp.enabled:true}")
     private boolean otpEnabled;
 
+    @Value("${app.embedding.kafka.topic:unset}")
+    private String embeddingTopic;
+
+    @Value("${app.embedding.kafka.concurrency:1}")
+    private int embeddingConcurrency;
+
+    @Value("${app.embedding.min-interval-ms:unset}")
+    private String embeddingIntervalMs;
+
+    @Value("${app.embedding.retry.interval-ms:unset}")
+    private String embeddingRetryIntervalMs;
+
     @EventListener(ApplicationReadyEvent.class)
     public void logStartupSummary() {
         String[] profiles = env.getActiveProfiles();
@@ -50,6 +62,8 @@ public class StartupInfoLogger {
         log.info("[startup]   server port    : {}", serverPort);
         log.info("[startup]   chat provider  : {} (openai model={})", chatProvider, openAiChatModel);
         log.info("[startup]   embed provider : {} (model={})", embeddingProvider, embeddingModel);
+        log.info("[startup]   embedding path : Kafka async (topic={}, concurrency={}, interval={}ms, retry={}ms)",
+                embeddingTopic, embeddingConcurrency, embeddingIntervalMs, embeddingRetryIntervalMs);
         log.info("[startup]   OTP enabled    : {}", otpEnabled);
         log.info("[startup]   health check   : GET /actuator/health");
         log.info("========================================================");

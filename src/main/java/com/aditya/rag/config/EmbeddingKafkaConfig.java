@@ -29,8 +29,11 @@ import org.springframework.util.backoff.FixedBackOff;
 
 import com.aditya.rag.kafka.EmbeddingJobMessage;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Configuration
 @EnableKafka
+@Slf4j
 public class EmbeddingKafkaConfig {
 
     @Bean
@@ -80,7 +83,7 @@ public class EmbeddingKafkaConfig {
         String dltTopic = environment.getProperty(
                 "app.embedding.kafka.dlt-topic", "embedding-jobs.DLT");
         long retryInterval = environment.getProperty(
-                "app.embedding.retry.interval-ms", Long.class, 10_000L);
+                "app.embedding.retry.interval-ms", Long.class, 60_000L);
         long retryAttempts = environment.getProperty(
                 "app.embedding.retry.max-attempts", Long.class, 4L);
 
@@ -94,6 +97,8 @@ public class EmbeddingKafkaConfig {
         DefaultErrorHandler errorHandler = new DefaultErrorHandler(recoverer, backOff);
         // Bad payloads and missing job state are not transient provider failures.
         errorHandler.addNotRetryableExceptions(IllegalArgumentException.class);
+        log.info("[embedding-kafka] error handler configured dltTopic={} retryIntervalMs={} retryAttempts={}",
+                dltTopic, retryInterval, retryAttempts);
         return errorHandler;
     }
 

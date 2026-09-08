@@ -64,7 +64,12 @@ public class DataIngestionService {
         if (chunks.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No readable chunks found in file");
         }
+        int totalChunkChars = chunks.stream()
+                .mapToInt(chunk -> chunk.getText().length())
+                .sum();
         log.info("[ingest] split '{}' into {} chunks", filename, chunks.size());
+        log.debug("[ingest] chunk summary file='{}' chunks={} totalChunkChars={} averageChunkChars={}",
+                filename, chunks.size(), totalChunkChars, totalChunkChars / chunks.size());
 
         EmbeddingJobService.QueuedJob queuedJob = embeddingJobService.createJob(
                 filename, fileType, userId, visibility, chunks);
