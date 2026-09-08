@@ -1,5 +1,6 @@
 package com.aditya.rag.service;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -165,8 +166,15 @@ public class EmbeddingJobService {
 
         // One message contains one chunk, so this results in one embedding call.
         rateLimiter.acquire();
+        // PgVectorStore maps Document.id to PostgreSQL UUID. The durable Kafka
+        // chunk key contains ":index", so derive a stable UUID per chunk while
+        // keeping the original key in metadata for diagnostics and retrieval.
+        String vectorDocumentId = UUID.nameUUIDFromBytes(
+                message.chunkId().getBytes(StandardCharsets.UTF_8)).toString();
+        log.debug("[embedding] vector document prepared job={} chunk={}/{} vectorId={}",
+                message.jobId(), message.chunkIndex() + 1, message.totalChunks(), vectorDocumentId);
         Document document = new Document(
-                message.chunkId(),
+                vectorDocumentId,
                 message.text(),
                 Map.of(
                         "source", message.filename(),
@@ -175,6 +183,7 @@ public class EmbeddingJobService {
                         "visibility", message.visibility(),
                         "documentId", message.documentId().toString(),
                         "jobId", message.jobId().toString(),
+                        "chunkId", message.chunkId(),
                         "chunkIndex", message.chunkIndex(),
                         "totalChunks", message.totalChunks()));
 
