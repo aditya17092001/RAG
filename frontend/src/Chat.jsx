@@ -119,7 +119,7 @@ export default function Chat({ onLogout }) {
     setUploadStatus(`Uploading ${file.name}...`);
     try {
       const res = await uploadFile(file, visibility);
-      setUploadStatus(`Uploaded ${res.filename} (${res.chunks} chunks, ${res.visibility})`);
+      setUploadStatus(`Queued ${res.filename} (${res.chunks} chunks) for background embedding`);
     } catch (err) {
       setUploadStatus("Upload failed: " + err.message);
     }

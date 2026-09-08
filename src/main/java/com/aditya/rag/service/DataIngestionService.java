@@ -10,12 +10,12 @@ import org.apache.tika.parser.AutoDetectParser;
 import org.apache.tika.parser.ParseContext;
 import org.apache.tika.sax.ToXMLContentHandler;
 import org.springframework.ai.document.Document;
-import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.http.HttpStatus;
 
+import com.aditya.rag.dto.EmbeddingQueueResult;
 import com.vladsch.flexmark.html2md.converter.FlexmarkHtmlConverter;
 
 import lombok.extern.slf4j.Slf4j;
@@ -24,28 +24,26 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class DataIngestionService {
 
-    private final VectorStore vectorStore;
+    private final EmbeddingJobService embeddingJobService;
     private final FlexmarkHtmlConverter htmlToMarkdown = FlexmarkHtmlConverter.builder().build();
 
-    public DataIngestionService(VectorStore vectorStore) {
-        this.vectorStore = vectorStore;
+    public DataIngestionService(EmbeddingJobService embeddingJobService) {
+        this.embeddingJobService = embeddingJobService;
     }
 
     /**
-     * Ingests any file (pdf, txt, docx, html, etc.) by:
-     * 1. Extracting structure-preserving HTML with Tika
-     * 2. Converting the HTML to Markdown (keeps tables, headings, lists)
-     * 3. Chunking and embedding into the vector store
-     *
-     * @param fileResource the uploaded file as a Spring Resource
-     * @param filename     original filename (used as metadata for filtering)
-     * @return number of chunks stored
+     * Parses and chunks the upload synchronously, then queues one Kafka message
+     * per chunk. Gemini embedding and PgVector persistence happen asynchronously
+     * in EmbeddingJobConsumer.
      */
-    public int ingestFile(Resource fileResource, String filename, UUID userId, String visibility) {
+    public EmbeddingQueueResult queueFile(
+            Resource fileResource,
+            String filename,
+            UUID userId,
+            String visibility) {
         long startedAt = System.currentTimeMillis();
         log.info("[ingest] START file='{}' owner={} visibility={}", filename, userId, visibility);
 
-        // Step 1: Extract as structure-preserving HTML, then convert to Markdown
         String markdown = convertToMarkdown(fileResource, filename);
         log.info("[ingest] converted '{}' to Markdown ({} chars)", filename, markdown.length());
 
@@ -54,63 +52,44 @@ public class DataIngestionService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No readable content found in file");
         }
 
-        // Step 2: Wrap Markdown in a Document with metadata
-        Document mdDoc = new Document(markdown, Map.of(
+        String fileType = getFileExtension(filename);
+        Document markdownDocument = new Document(markdown, Map.of(
                 "source", filename,
-                "type", getFileExtension(filename),
+                "type", fileType,
                 "owner", userId.toString(),
-                "visibility", visibility
-        ));
+                "visibility", visibility));
 
-        // Step 3: Split into chunks using the recursive character text splitter.
-        // It splits on paragraph breaks first, then line breaks, spaces, and
-        // finally characters, keeping related text together and carrying an
-        // overlap between consecutive chunks to preserve context.
         var splitter = new RecursiveCharacterTextSplitter(1000, 200);
-
-        List<Document> chunks = splitter.apply(List.of(mdDoc));
+        List<Document> chunks = splitter.apply(List.of(markdownDocument));
+        if (chunks.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No readable chunks found in file");
+        }
         log.info("[ingest] split '{}' into {} chunks", filename, chunks.size());
 
-        // Step 4: Embed each chunk (Google Gemini) and persist to the PgVector
-        // store. This is the step most likely to fail (network/TLS to the
-        // embedding API, model errors, or rate limits), so log it explicitly.
-        log.info("[ingest] embedding + storing {} chunks for '{}' ...", chunks.size(), filename);
-        try {
-            vectorStore.add(chunks);
-        } catch (Exception e) {
-            log.error("[ingest] FAILED to embed/store chunks for '{}': {}", filename, e.getMessage(), e);
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_GATEWAY,
-                    "Failed to embed/store document (embedding service error): " + e.getMessage(), e);
-        }
+        EmbeddingJobService.QueuedJob queuedJob = embeddingJobService.createJob(
+                filename, fileType, userId, visibility, chunks);
+        embeddingJobService.publish(queuedJob);
 
         long tookMs = System.currentTimeMillis() - startedAt;
-        log.info("[ingest] DONE file='{}' chunks={} took={}ms", filename, chunks.size(), tookMs);
-
-        return chunks.size();
+        log.info("[ingest] QUEUED file='{}' job={} chunks={} took={}ms",
+                filename, queuedJob.result().jobId(), chunks.size(), tookMs);
+        return queuedJob.result();
     }
 
-    /**
-     * Converts any file to Markdown using Tika (extract HTML) + Flexmark (HTML to MD).
-     */
     private String convertToMarkdown(Resource fileResource, String filename) {
         try (InputStream in = fileResource.getInputStream()) {
-            // ToXMLContentHandler preserves structure (tables, headings) as XHTML
             ToXMLContentHandler handler = new ToXMLContentHandler();
             AutoDetectParser parser = new AutoDetectParser();
             Metadata metadata = new Metadata();
 
             parser.parse(in, handler, metadata, new ParseContext());
             String html = handler.toString();
-
-            // Convert the extracted HTML to Markdown
             return htmlToMarkdown.convert(html).trim();
         } catch (Exception e) {
             log.error("Failed to convert {} to Markdown", filename, e);
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
-                    "Could not process file: " + e.getMessage()
-            );
+                    "Could not process file: " + e.getMessage());
         }
     }
 
