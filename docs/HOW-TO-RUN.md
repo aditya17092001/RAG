@@ -183,9 +183,37 @@ docker run --rm -p 8080:8080 --env-file .env \
 1. Sign up in the UI (an OTP is emailed via the configured Gmail account).
 2. Verify the OTP.
 3. Sign in.
-4. Upload a document (PDF, TXT, DOCX, etc.). It is chunked (recursive character
-   splitter), embedded via Gemini, and stored in the vector DB.
-5. Ask questions, answers are grounded in your uploaded documents (RAG).
+4. Upload a document (PDF, TXT, DOCX, etc.). The API extracts and chunks it,
+   then publishes one embedding job per chunk to Kafka and returns HTTP `202`.
+5. Poll `GET /embedding-jobs/{jobId}` using the returned job ID until the status
+   is `COMPLETED`. Gemini embedding and PgVector persistence happen in the Kafka
+   consumer, not in the upload request.
+6. Ask questions after the job is completed; answers are grounded in the
+   uploaded documents (RAG).
+
+### 7.1 Kafka topics and embedding worker
+
+Create these topics manually in Aiven before starting the application:
+
+| Topic | Partitions | Purpose |
+|---|---:|---|
+| `embedding-jobs` | 1 | One message per document chunk |
+| `embedding-jobs.DLT` | 1 | Chunks that fail after all retries |
+
+The application deliberately does not create retry topics. Temporary failures
+are retried on `embedding-jobs` with a 10-second delay and four retry attempts;
+terminal failures are published directly to `embedding-jobs.DLT`. The consumer
+runs with concurrency 1 and waits one second between embedding requests by
+default. These settings can be overridden with `EMBEDDING_KAFKA_CONCURRENCY`,
+`EMBEDDING_MIN_INTERVAL_MS`, `EMBEDDING_RETRY_INTERVAL_MS`, and
+`EMBEDDING_RETRY_MAX_ATTEMPTS`.
+
+The upload response contains `jobId`, `documentId`, `chunks`, and `status`.
+The authenticated status endpoint only returns jobs owned by the current user:
+
+```text
+GET /embedding-jobs/{jobId}
+```
 
 ---
 
@@ -230,12 +258,23 @@ DB_PASSWORD
 VECTOR_DB_URL
 VECTOR_DB_USERNAME
 VECTOR_DB_PASSWORD
+KAFKA_BOOTSTRAP
+KAFKA_USER
+KAFKA_PASSWORD
 ```
 
-> Note on "Secret Files": Render can also mount an uploaded file, but a secret
-> file is NOT automatically turned into environment variables. This app resolves
-> `${...}` placeholders from environment variables, so use the Environment tab
-> ("Add from .env"), not a secret file.
+The Aiven CA certificate is stored at `src/main/resources/ca.pem`. The
+production Dockerfile copies it to `/app/certs/ca.pem` and sets:
+
+```text
+KAFKA_CA_PEM_PATH=/app/certs/ca.pem
+```
+
+Do not set `KAFKA_CA_PEM_PATH` to `classpath:ca.pem`: the Kafka client needs a
+real filesystem path for its PEM truststore. If you use a Render Secret File
+instead, upload it as `aiven-kafka-ca.pem` and set
+`KAFKA_CA_PEM_PATH=/etc/secrets/aiven-kafka-ca.pem` in Render. Never commit a
+private key or Kafka password.
 
 ### 8.3 Port binding
 Render injects a `PORT` environment variable and requires the app to listen on

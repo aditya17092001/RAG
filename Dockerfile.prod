@@ -31,13 +31,21 @@ RUN mvn -B -q clean package -DskipTests
 FROM eclipse-temurin:21-jre
 WORKDIR /app
 
-RUN useradd --system --create-home appuser
-USER appuser
+RUN useradd --system --create-home appuser \
+    && mkdir -p /app/certs \
+    && chown -R appuser:appuser /app/certs
 
 COPY --from=build /app/target/*.jar app.jar
+# ca.pem is a public CA certificate, not an application secret. Copy it out of
+# the Spring Boot jar so Kafka can read it using a real filesystem path.
+COPY --from=build /app/target/classes/ca.pem /app/certs/ca.pem
 
 # Activate the prod profile (OpenRouter chat + Aiven Postgres).
 ENV SPRING_PROFILES_ACTIVE=prod
+# Production PEM path; Render environment variables can override this value.
+ENV KAFKA_CA_PEM_PATH=/app/certs/ca.pem
+
+USER appuser
 
 EXPOSE 8080
 
